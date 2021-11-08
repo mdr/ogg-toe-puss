@@ -1,0 +1,130 @@
+.app {
+  padding: 10px;
+}
+
+.show-hex-checkbox {
+  padding-top: 10px;
+}
+
+button {
+  display: inline-block;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 2px;
+  margin-right: 2px;
+  text-decoration: none;
+  background: #0069ed;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: background 150ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  &:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+  }
+
+  &:hover,&:focus {
+    background: #0053ba;
+  }
+  
+  &:active {
+    transform: scale(0.99);
+  }
+    
+}
+
+
+.ogg-page-table {
+  table-layout: fixed;
+  width: 800px;
+  border-collapse: collapse;
+  border: 2px solid black;
+  td {
+    text-align: center;
+  }
+}
+
+.ogg-page-table__byte-header-cell {
+  border-right: 1px solid black;
+  text-align: center;
+  width: 80px;
+}
+
+.ogg-page-table__header-cell {
+  font-weight: bold;
+  border-top: 1px solid black;
+}
+
+.ogg-page-table__starts-mid-table {
+  border-left: 1px solid black;
+}
+
+.ogg-page-table__border-right {
+  border-right: 1px solid black;
+}
+
+.ogg-page-table__hex-cell {
+  font-family: 'Courier New', Courier, monospace;
+  padding-top: 5px;
+}
+
+.ogg-page-table__interpretation-cell {
+  padding-bottom: 5px;
+  border-bottom: 1px solid black;
+}
+
+.ogg-page-table__capture-pattern-cell {
+  background-color: rgb(255, 204, 204);
+}
+
+.ogg-page-table__capture-pattern-cell.ogg-page-table__interpretation-cell {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: rgb(255, 204, 204);
+}
+
+.ogg-page-table__version-cell {
+  background-color: rgb(255, 225, 205);
+}
+
+.ogg-page-table__header-type-cell {
+  background-color: rgb(245, 255, 202);
+}
+
+.ogg-page-table__granule-position-cell {
+  background-color: rgb(220, 252, 208);
+}
+
+.ogg-page-table__bitstream-serial-number-cell {
+  background-color: rgb(209, 253, 255);
+}
+
+.ogg-page-table__page-sequence-number-cell {
+  background-color: rgb(215, 205, 252);
+}
+
+.ogg-page-table__crc-checksum-cell {
+  background-color: rgb(233, 187, 255);
+}
+
+.ogg-page-table__page-segments-cell {
+  background-color: rgb(250, 226, 247);
+}
+
+.ogg-page-table__segment-length-cell {
+  background-color: rgb(221, 221, 221);
+}
+
+.ogg-segment-hex {
+  font-family: 'Courier New', Courier, monospace;
+  border: 1px dashed black;
+  padding: 5px;
+  overflow-wrap: break-word;
+}
