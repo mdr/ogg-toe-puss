@@ -304,7 +304,7 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
           </td>
           {page.numberOfPageSegments > 0 && (
             <td className="byte-table__header-cell byte-table__cell-style-9 byte-table__starts-mid-table">
-              Segment 0 Size
+              Segment 1 Size
             </td>
           )}
         </tr>
@@ -335,7 +335,7 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         </tr>
         {_.chunk(_.range(1, page.numberOfPageSegments), 4).map((segmentIndices) => {
           const cells: SegmentSizeCell[] = segmentIndices.map((segmentIndex) => ({
-            header: `Segment ${segmentIndex} size`,
+            header: `Segment ${segmentIndex + 1} size`,
             hex: page.getSegmentSizeHex(segmentIndex),
             interpretation: page.getSegmentSize(segmentIndex).toString(),
           }))

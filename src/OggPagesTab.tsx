@@ -16,7 +16,7 @@ export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
   return (
     <div className="ogg-pages-tab">
       <h1>
-        Ogg Page {pageNumber} ({oggPage?.pageSize ?? 0} bytes)
+        Ogg Page {pageNumber + 1} / {oggPages.length} ({oggPage?.pageSize ?? 0} bytes)
       </h1>
       <button onClick={() => setPageNumber(pageNumber - 1)} disabled={pageNumber === 0}>
         Previous
@@ -35,7 +35,7 @@ export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
           {_.range(0, oggPage.numberOfPageSegments).map((segmentIndex) => (
             <React.Fragment key={`segment-${segmentIndex}`}>
               <h2 key={`segment-header-${segmentIndex}`}>
-                Segment {segmentIndex} ({oggPage.getSegmentSize(segmentIndex)} bytes)
+                Segment {segmentIndex + 1} ({oggPage.getSegmentSize(segmentIndex)} bytes)
               </h2>
               {showHex && (
                 <div className="raw-hex" key={`segment-hex-${segmentIndex}`}>
