@@ -1,5 +1,6 @@
 import _ from "lodash"
 import { DataWindow } from "./DataWindow"
+import { asHexPair, asHexString } from "./hexUtils"
 
 export type Bytes = number
 
@@ -104,9 +105,7 @@ export class OggPage {
 
   getSegmentHex = (segmentIndex: number): string => {
     const segment = this.segments[segmentIndex]
-    return Array.from(new Uint8Array(segment)).map(asHexPair).join("")
+    return asHexString(segment)
   }
 
 }
-
-const asHexPair = (n: number): string => ('0' + n.toString(16)).slice(-2)

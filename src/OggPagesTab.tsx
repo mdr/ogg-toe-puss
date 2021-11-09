@@ -9,7 +9,7 @@ export interface OggPagesTabProps {
   readonly oggPages: OggPage[]
 }
 
-export const OggPagesTab = ({oggPages}: OggPagesTabProps) => {
+export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
   const [showHex, setShowHex] = useState<boolean>(false)
   const [pageNumber, setPageNumber] = useState<number>(0)
   const oggPage = pageNumber < oggPages.length ? oggPages[pageNumber] : undefined
@@ -38,7 +38,7 @@ export const OggPagesTab = ({oggPages}: OggPagesTabProps) => {
                 Segment {segmentIndex} ({oggPage.getSegmentSize(segmentIndex)} bytes)
               </h2>
               {showHex && (
-                <div className="ogg-segment-hex" key={`segment-hex-${segmentIndex}`}>
+                <div className="raw-hex" key={`segment-hex-${segmentIndex}`}>
                   {oggPage.getSegmentHex(segmentIndex)}
                 </div>
               )}

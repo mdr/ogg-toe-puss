@@ -42,7 +42,11 @@ button {
 }
 
 
-.ogg-page-table {
+.id-header-table {
+  margin-bottom: 10px;
+}
+
+.ogg-page-table, .id-header-table {
   table-layout: fixed;
   width: 800px;
   border-collapse: collapse;
@@ -122,7 +126,7 @@ button {
   background-color: rgb(221, 221, 221);
 }
 
-.ogg-segment-hex {
+.raw-hex {
   font-family: 'Courier New', Courier, monospace;
   border: 1px dashed black;
   padding: 5px;
