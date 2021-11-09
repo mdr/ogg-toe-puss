@@ -9,8 +9,11 @@ import { asHexString } from './hexUtils'
 import { OggOpusIdentificationHeader } from './OggOpusIdentificationHeader'
 import { DataWindow } from './DataWindow'
 import { OggOpusIdentificationHeaderTable } from './OggOpusIdentificationHeaderTable'
+import { OggOpusCommentHeaderTable } from './OggOpusCommentHeaderTable'
+import { OggOpusCommentHeader } from './OggOpusCommentHeader'
 
 const opusFile = `${process.env.PUBLIC_URL}/example_0.opus`
+//const opusFile = `${process.env.PUBLIC_URL}/sample1.opus`
 
 enum AppTab {
   OGG_PAGES = 'OGG_PAGES',
@@ -26,7 +29,7 @@ const PacketsTab = ({ streams }: PacketsTabProps) => {
   const [showHex, setShowHex] = useState<boolean>(false)
   return (
     <div>
-      <h1>Packets</h1>
+      <h1>Ogg Packets</h1>
       <p>Bitstream serial number: {stream.serialNumber}</p>
       <div className="show-hex-checkbox">
         <label htmlFor="showHex">Show Hex</label>
@@ -42,6 +45,15 @@ const PacketsTab = ({ streams }: PacketsTabProps) => {
               <h3>Ogg Opus Identification Header</h3>
               <OggOpusIdentificationHeaderTable
                 header={new OggOpusIdentificationHeader(new DataWindow(packet))}
+                showHex={showHex}
+              />
+            </>
+          )}
+          {i === 1 && (
+            <>
+              <h3>Ogg Opus Comment Header</h3>
+              <OggOpusCommentHeaderTable
+                header={new OggOpusCommentHeader(new DataWindow(packet))}
                 showHex={showHex}
               />
             </>
@@ -77,7 +89,7 @@ export const App = () => {
         Ogg Pages
       </button>
       <button onClick={() => setTab(AppTab.PACKETS)} disabled={tab === AppTab.PACKETS}>
-        Packets
+        Ogg Packets
       </button>
 
       {tab === AppTab.OGG_PAGES && <OggPagesTab oggPages={oggPages ?? []} />}

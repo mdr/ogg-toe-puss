@@ -49,8 +49,8 @@ export class OggPage {
 
   getGranulePositionHex = (byteIndex: number): string => asHexPair(this.dataWindow.getByte(6 + byteIndex))
 
-  get bitstreamSerialNumber(): number {
-    return this.dataWindow.getInt32(14)
+  get bitstreamSerialNumber(): string {
+    return asHexString(this.dataWindow.getArrayBufferSlice(14, 4))
   }
 
   getBitstreamSerialNumberHex = (byteIndex: number): string => asHexPair(this.dataWindow.getByte(14 + byteIndex))
@@ -61,8 +61,8 @@ export class OggPage {
 
   getPageSequenceNumberHex = (byteIndex: number): string => asHexPair(this.dataWindow.getByte(18 + byteIndex))
 
-  get crcChecksum(): number {
-    return this.dataWindow.getInt32(22)
+  get crcChecksum(): string {
+    return asHexString(this.dataWindow.getArrayBufferSlice(22, 4))
   }
 
   getCrcChecksumHex = (byteIndex: number): string => asHexPair(this.dataWindow.getByte(22 + byteIndex))

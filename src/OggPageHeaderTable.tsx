@@ -28,13 +28,13 @@ interface SegmentSizeRowProps {
 const SegmentSizeRow = ({ showHex, startByte, endByte, cells }: SegmentSizeRowProps) => (
   <>
     <tr>
-      <th className="ogg-page-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
+      <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
         {startByte}-{endByte}
       </th>
       {cells.map((cell, i) => (
         <td
           key={`segment-size-header-row-${i}`}
-          className="ogg-page-table__header-cell ogg-page-table__segment-length-cell ogg-page-table__starts-mid-table ogg-page-table__border-right"
+          className="byte-table__header-cell byte-table__cell-style-9 byte-table__starts-mid-table byte-table__border-right"
         >
           {cell.header}
         </td>
@@ -45,7 +45,7 @@ const SegmentSizeRow = ({ showHex, startByte, endByte, cells }: SegmentSizeRowPr
         {cells.map((cell, i) => (
           <td
             key={`segment-size-hex-row-${i}`}
-            className="ogg-page-table__hex-cell ogg-page-table__segment-length-cell ogg-page-table__starts-mid-table ogg-page-table__border-right"
+            className="byte-table__hex-cell byte-table__cell-style-9 byte-table__starts-mid-table byte-table__border-right"
           >
             {cell.hex}
           </td>
@@ -56,7 +56,7 @@ const SegmentSizeRow = ({ showHex, startByte, endByte, cells }: SegmentSizeRowPr
       {cells.map((cell, i) => (
         <td
           key={`segment-size-interpretation-${i}`}
-          className="ogg-page-table__interpretation-cell ogg-page-table__segment-length-cell ogg-page-table__starts-mid-table ogg-page-table__border-right"
+          className="byte-table__interpretation-cell byte-table__cell-style-9 byte-table__starts-mid-table byte-table__border-right"
         >
           {cell.interpretation}
         </td>
@@ -67,122 +67,122 @@ const SegmentSizeRow = ({ showHex, startByte, endByte, cells }: SegmentSizeRowPr
 
 export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
   return (
-    <table className="ogg-page-table">
+    <table className="ogg-page-table byte-table">
       <tbody>
         <tr>
-          <th className="ogg-page-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
+          <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
             0-3
           </th>
-          <td className="ogg-page-table__header-cell ogg-page-table__capture-pattern-cell" colSpan={4}>
+          <td className="byte-table__header-cell byte-table__cell-style-1" colSpan={4}>
             Capture Pattern
           </td>
         </tr>
         {showHex && (
           <tr>
-            <td className="ogg-page-table__hex-cell ogg-page-table__capture-pattern-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-1">
               {page.getCapturePatternHex(0)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__capture-pattern-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-1">
               {page.getCapturePatternHex(1)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__capture-pattern-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-1">
               {page.getCapturePatternHex(2)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__capture-pattern-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-1">
               {page.getCapturePatternHex(3)}
             </td>
           </tr>
         )}
         <tr>
-          <td className="ogg-page-table__interpretation-cell ogg-page-table__capture-pattern-cell">
+          <td className="byte-table__interpretation-cell byte-table__cell-style-1">
             {page.capturePattern[0]}
           </td>
-          <td className="ogg-page-table__interpretation-cell ogg-page-table__capture-pattern-cell">
+          <td className="byte-table__interpretation-cell byte-table__cell-style-1">
             {page.capturePattern[1]}
           </td>
-          <td className="ogg-page-table__interpretation-cell ogg-page-table__capture-pattern-cell">
+          <td className="byte-table__interpretation-cell byte-table__cell-style-1">
             {page.capturePattern[2]}
           </td>
-          <td className="ogg-page-table__interpretation-cell ogg-page-table__capture-pattern-cell">
+          <td className="byte-table__interpretation-cell byte-table__cell-style-1">
             {page.capturePattern[3]}
           </td>
         </tr>
 
         <tr>
-          <th className="ogg-page-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
+          <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
             4-7
           </th>
-          <td className="ogg-page-table__header-cell ogg-page-table__version-cell">Version</td>
-          <td className="ogg-page-table__header-cell ogg-page-table__header-type-cell ogg-page-table__starts-mid-table">
+          <td className="byte-table__header-cell byte-table__cell-style-2">Version</td>
+          <td className="byte-table__header-cell byte-table__cell-style-3 byte-table__starts-mid-table">
             Header Type
           </td>
           <td
-            className="ogg-page-table__header-cell ogg-page-table__granule-position-cell ogg-page-table__starts-mid-table"
+            className="byte-table__header-cell byte-table__cell-style-4 byte-table__starts-mid-table"
             colSpan={2}
           ></td>
         </tr>
         {showHex && (
           <tr>
-            <td className="ogg-page-table__hex-cell ogg-page-table__version-cell">{page.versionHex}</td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__header-type-cell ogg-page-table__starts-mid-table">
+            <td className="byte-table__hex-cell byte-table__cell-style-2">{page.versionHex}</td>
+            <td className="byte-table__hex-cell byte-table__cell-style-3 byte-table__starts-mid-table">
               {page.headerTypeHex}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__granule-position-cell ogg-page-table__starts-mid-table">
+            <td className="byte-table__hex-cell byte-table__cell-style-4 byte-table__starts-mid-table">
               {page.getGranulePositionHex(0)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__granule-position-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-4">
               {page.getGranulePositionHex(1)}
             </td>
           </tr>
         )}
         <tr>
-          <td className="ogg-page-table__interpretation-cell ogg-page-table__version-cell">{page.version}</td>
-          <td className="ogg-page-table__interpretation-cell ogg-page-table__header-type-cell ogg-page-table__starts-mid-table">
+          <td className="byte-table__interpretation-cell byte-table__cell-style-2">{page.version}</td>
+          <td className="byte-table__interpretation-cell byte-table__cell-style-3 byte-table__starts-mid-table">
             {describeHeaderType(page)}
           </td>
           <td
-            className="ogg-page-table__interpretation-cell ogg-page-table__granule-position-cell ogg-page-table__starts-mid-table"
+            className="byte-table__interpretation-cell byte-table__cell-style-4 byte-table__starts-mid-table"
             colSpan={2}
           ></td>
         </tr>
 
         <tr>
-          <th className="ogg-page-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
+          <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
             8-11
           </th>
-          <td className="ogg-page-table__header-cell ogg-page-table__granule-position-cell" colSpan={4}>
+          <td className="byte-table__header-cell byte-table__cell-style-4" colSpan={4}>
             Granule Position
           </td>
         </tr>
         {showHex && (
           <tr>
-            <td className="ogg-page-table__hex-cell ogg-page-table__granule-position-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-4">
               {page.getGranulePositionHex(2)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__granule-position-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-4">
               {page.getGranulePositionHex(3)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__granule-position-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-4">
               {page.getGranulePositionHex(4)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__granule-position-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-4">
               {page.getGranulePositionHex(5)}
             </td>
           </tr>
         )}
         <tr>
-          <td className="ogg-page-table__interpretation-cell ogg-page-table__granule-position-cell" colSpan={4}>
+          <td className="byte-table__interpretation-cell byte-table__cell-style-4" colSpan={4}>
             {page.granulePosition.toString()}
           </td>
         </tr>
 
         <tr>
-          <th className="ogg-page-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
+          <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
             12-15
           </th>
-          <td className="ogg-page-table__header-cell ogg-page-table__granule-position-cell" colSpan={2}></td>
+          <td className="byte-table__header-cell byte-table__cell-style-4" colSpan={2}></td>
           <td
-            className="ogg-page-table__header-cell ogg-page-table__bitstream-serial-number-cell ogg-page-table__starts-mid-table"
+            className="byte-table__header-cell byte-table__cell-style-5 byte-table__starts-mid-table"
             colSpan={2}
           >
             Bitstream Serial Number
@@ -190,24 +190,24 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         </tr>
         {showHex && (
           <tr>
-            <td className="ogg-page-table__hex-cell ogg-page-table__granule-position-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-4">
               {page.getGranulePositionHex(6)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__granule-position-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-4">
               {page.getGranulePositionHex(7)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__bitstream-serial-number-cell ogg-page-table__starts-mid-table">
+            <td className="byte-table__hex-cell byte-table__cell-style-5 byte-table__starts-mid-table">
               {page.getBitstreamSerialNumberHex(0)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__bitstream-serial-number-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-5">
               {page.getBitstreamSerialNumberHex(1)}
             </td>
           </tr>
         )}
         <tr>
-          <td className="ogg-page-table__interpretation-cell ogg-page-table__granule-position-cell" colSpan={2}></td>
+          <td className="byte-table__interpretation-cell byte-table__cell-style-4" colSpan={2}></td>
           <td
-            className="ogg-page-table__interpretation-cell ogg-page-table__bitstream-serial-number-cell ogg-page-table__starts-mid-table"
+            className="byte-table__interpretation-cell byte-table__cell-style-5 byte-table__starts-mid-table"
             colSpan={2}
           >
             {page.bitstreamSerialNumber}
@@ -215,12 +215,12 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         </tr>
 
         <tr>
-          <th className="ogg-page-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
+          <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
             16-19
           </th>
-          <td className="ogg-page-table__header-cell ogg-page-table__bitstream-serial-number-cell" colSpan={2}></td>
+          <td className="byte-table__header-cell byte-table__cell-style-5" colSpan={2}></td>
           <td
-            className="ogg-page-table__header-cell ogg-page-table__page-sequence-number-cell ogg-page-table__starts-mid-table"
+            className="byte-table__header-cell byte-table__cell-style-6 byte-table__starts-mid-table"
             colSpan={2}
           >
             Page Sequence Number
@@ -228,27 +228,27 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         </tr>
         {showHex && (
           <tr>
-            <td className="ogg-page-table__hex-cell ogg-page-table__bitstream-serial-number-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-5">
               {page.getBitstreamSerialNumberHex(2)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__bitstream-serial-number-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-5">
               {page.getBitstreamSerialNumberHex(3)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__page-sequence-number-cell ogg-page-table__starts-mid-table">
+            <td className="byte-table__hex-cell byte-table__cell-style-6 byte-table__starts-mid-table">
               {page.getPageSequenceNumberHex(0)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__page-sequence-number-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-6">
               {page.getPageSequenceNumberHex(1)}
             </td>
           </tr>
         )}
         <tr>
           <td
-            className="ogg-page-table__interpretation-cell ogg-page-table__bitstream-serial-number-cell"
+            className="byte-table__interpretation-cell byte-table__cell-style-5"
             colSpan={2}
           ></td>
           <td
-            className="ogg-page-table__interpretation-cell ogg-page-table__page-sequence-number-cell ogg-page-table__starts-mid-table"
+            className="byte-table__interpretation-cell byte-table__cell-style-6 byte-table__starts-mid-table"
             colSpan={2}
           >
             {page.pageSequenceNumber}
@@ -256,12 +256,12 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         </tr>
 
         <tr>
-          <th className="ogg-page-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
+          <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
             20-23
           </th>
-          <td className="ogg-page-table__header-cell ogg-page-table__page-sequence-number-cell" colSpan={2}></td>
+          <td className="byte-table__header-cell byte-table__cell-style-6" colSpan={2}></td>
           <td
-            className="ogg-page-table__header-cell ogg-page-table__crc-checksum-cell ogg-page-table__starts-mid-table"
+            className="byte-table__header-cell byte-table__cell-style-7 byte-table__starts-mid-table"
             colSpan={2}
           >
             CRC Checksum
@@ -269,25 +269,25 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         </tr>
         {showHex && (
           <tr>
-            <td className="ogg-page-table__hex-cell ogg-page-table__page-sequence-number-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-6">
               {page.getPageSequenceNumberHex(2)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__page-sequence-number-cell">
+            <td className="byte-table__hex-cell byte-table__cell-style-6">
               {page.getPageSequenceNumberHex(3)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__crc-checksum-cell ogg-page-table__starts-mid-table">
+            <td className="byte-table__hex-cell byte-table__cell-style-7 byte-table__starts-mid-table">
               {page.getCrcChecksumHex(0)}
             </td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__crc-checksum-cell">{page.getCrcChecksumHex(1)}</td>
+            <td className="byte-table__hex-cell byte-table__cell-style-7">{page.getCrcChecksumHex(1)}</td>
           </tr>
         )}
         <tr>
           <td
-            className="ogg-page-table__interpretation-cell ogg-page-table__page-sequence-number-cell"
+            className="byte-table__interpretation-cell byte-table__cell-style-6"
             colSpan={2}
           ></td>
           <td
-            className="ogg-page-table__interpretation-cell ogg-page-table__crc-checksum-cell ogg-page-table__starts-mid-table"
+            className="byte-table__interpretation-cell byte-table__cell-style-7 byte-table__starts-mid-table"
             colSpan={2}
           >
             {page.crcChecksum}
@@ -295,40 +295,40 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         </tr>
 
         <tr>
-          <th className="ogg-page-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
+          <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
             24-27
           </th>
-          <td className="ogg-page-table__header-cell ogg-page-table__crc-checksum-cell" colSpan={2}></td>
-          <td className="ogg-page-table__header-cell ogg-page-table__page-segments-cell ogg-page-table__starts-mid-table">
+          <td className="byte-table__header-cell byte-table__cell-style-7" colSpan={2}></td>
+          <td className="byte-table__header-cell byte-table__cell-style-8 byte-table__starts-mid-table">
             Page Segments
           </td>
           {page.numberOfPageSegments > 0 && (
-            <td className="ogg-page-table__header-cell ogg-page-table__segment-length-cell ogg-page-table__starts-mid-table">
+            <td className="byte-table__header-cell byte-table__cell-style-9 byte-table__starts-mid-table">
               Segment 0 Size
             </td>
           )}
         </tr>
         {showHex && (
           <tr>
-            <td className="ogg-page-table__hex-cell ogg-page-table__crc-checksum-cell">{page.getCrcChecksumHex(2)}</td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__crc-checksum-cell">{page.getCrcChecksumHex(3)}</td>
-            <td className="ogg-page-table__hex-cell ogg-page-table__page-segments-cell ogg-page-table__starts-mid-table">
+            <td className="byte-table__hex-cell byte-table__cell-style-7">{page.getCrcChecksumHex(2)}</td>
+            <td className="byte-table__hex-cell byte-table__cell-style-7">{page.getCrcChecksumHex(3)}</td>
+            <td className="byte-table__hex-cell byte-table__cell-style-8 byte-table__starts-mid-table">
               {page.numberOfPageSegmentsHex}
             </td>
             {page.numberOfPageSegments > 0 && (
-              <td className="ogg-page-table__hex-cell ogg-page-table__segment-length-cell ogg-page-table__starts-mid-table">
+              <td className="byte-table__hex-cell byte-table__cell-style-9 byte-table__starts-mid-table">
                 {page.getSegmentSizeHex(0)}
               </td>
             )}
           </tr>
         )}
         <tr>
-          <td className="ogg-page-table__interpretation-cell ogg-page-table__crc-checksum-cell" colSpan={2}></td>
-          <td className="ogg-page-table__interpretation-cell ogg-page-table__page-segments-cell ogg-page-table__starts-mid-table">
+          <td className="byte-table__interpretation-cell byte-table__cell-style-7" colSpan={2}></td>
+          <td className="byte-table__interpretation-cell byte-table__cell-style-8 byte-table__starts-mid-table">
             {page.numberOfPageSegments}
           </td>
           {page.numberOfPageSegments > 0 && (
-            <td className="ogg-page-table__interpretation-cell ogg-page-table__segment-length-cell ogg-page-table__starts-mid-table">
+            <td className="byte-table__interpretation-cell byte-table__cell-style-9 byte-table__starts-mid-table">
               {page.getSegmentSize(0)}
             </td>
           )}

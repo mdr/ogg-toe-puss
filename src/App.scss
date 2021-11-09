@@ -42,11 +42,11 @@ button {
 }
 
 
-.id-header-table {
+.id-header-table, .comment-header-table {
   margin-bottom: 10px;
 }
 
-.ogg-page-table, .id-header-table {
+.byte-table {
   table-layout: fixed;
   width: 800px;
   border-collapse: collapse;
@@ -56,73 +56,73 @@ button {
   }
 }
 
-.ogg-page-table__byte-header-cell {
+.byte-table__byte-header-cell {
   border-right: 1px solid black;
   text-align: center;
   width: 80px;
 }
 
-.ogg-page-table__header-cell {
+.byte-table__header-cell {
   font-weight: bold;
   border-top: 1px solid black;
 }
 
-.ogg-page-table__starts-mid-table {
+.byte-table__starts-mid-table {
   border-left: 1px solid black;
 }
 
-.ogg-page-table__border-right {
+.byte-table__border-right {
   border-right: 1px solid black;
 }
 
-.ogg-page-table__hex-cell {
+.byte-table__hex-cell {
   font-family: 'Courier New', Courier, monospace;
   padding-top: 5px;
 }
 
-.ogg-page-table__interpretation-cell {
+.byte-table__interpretation-cell {
   padding-bottom: 5px;
   border-bottom: 1px solid black;
 }
 
-.ogg-page-table__capture-pattern-cell {
+.byte-table__cell-style-1 {
   background-color: rgb(255, 204, 204);
 }
 
-.ogg-page-table__capture-pattern-cell.ogg-page-table__interpretation-cell {
+.byte-table__cell-style-1.byte-table__interpretation-cell {
   font-family: 'Courier New', Courier, monospace;
   background-color: rgb(255, 204, 204);
 }
 
-.ogg-page-table__version-cell {
+.byte-table__cell-style-2 {
   background-color: rgb(255, 225, 205);
 }
 
-.ogg-page-table__header-type-cell {
+.byte-table__cell-style-3 {
   background-color: rgb(245, 255, 202);
 }
 
-.ogg-page-table__granule-position-cell {
+.byte-table__cell-style-4 {
   background-color: rgb(220, 252, 208);
 }
 
-.ogg-page-table__bitstream-serial-number-cell {
+.byte-table__cell-style-5 {
   background-color: rgb(209, 253, 255);
 }
 
-.ogg-page-table__page-sequence-number-cell {
+.byte-table__cell-style-6 {
   background-color: rgb(215, 205, 252);
 }
 
-.ogg-page-table__crc-checksum-cell {
+.byte-table__cell-style-7 {
   background-color: rgb(233, 187, 255);
 }
 
-.ogg-page-table__page-segments-cell {
+.byte-table__cell-style-8 {
   background-color: rgb(250, 226, 247);
 }
 
-.ogg-page-table__segment-length-cell {
+.byte-table__cell-style-9 {
   background-color: rgb(221, 221, 221);
 }
 
