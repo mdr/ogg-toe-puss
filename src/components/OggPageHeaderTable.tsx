@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import { OggPage } from './OggPage'
-import { Bytes } from './types'
+import { OggPage } from '../audio/OggPage'
+import { Bytes } from '../util/types'
 export interface OggPageTableProps {
   page: OggPage
   showHex: boolean

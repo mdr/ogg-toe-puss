@@ -1,5 +1,5 @@
-import { DataWindow } from './DataWindow'
-import { asHexPair } from './hexUtils'
+import { DataWindow } from '../util/DataWindow'
+import { asHexPair } from '../util/hexUtils'
 
 export class OggOpusIdentificationHeader {
   constructor(private readonly dataWindow: DataWindow) {}

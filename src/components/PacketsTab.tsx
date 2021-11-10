@@ -1,13 +1,13 @@
 import React from 'react'
 
 import './App.scss'
-import { LogicalBitstream } from './packetExtractor'
-import { asHexString } from './hexUtils'
-import { OggOpusIdentificationHeader } from './OggOpusIdentificationHeader'
-import { DataWindow } from './DataWindow'
+import { LogicalBitstream } from '../audio/packetExtractor'
+import { asHexString } from '../util/hexUtils'
+import { OggOpusIdentificationHeader } from '../audio/OggOpusIdentificationHeader'
+import { DataWindow } from '../util/DataWindow'
 import { OggOpusIdentificationHeaderTable } from './OggOpusIdentificationHeaderTable'
 import { OggOpusCommentHeaderTable } from './OggOpusCommentHeaderTable'
-import { OggOpusCommentHeader } from './OggOpusCommentHeader'
+import { OggOpusCommentHeader } from '../audio/OggOpusCommentHeader'
 import { useShowHex } from './showHexHook'
 
 export interface PacketsTabProps {

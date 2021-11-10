@@ -1,5 +1,5 @@
 import { OggPage } from './OggPage'
-import { DataWindow } from './DataWindow'
+import { DataWindow } from '../util/DataWindow'
 
 export const parseOggPages = (arrayBuffer: ArrayBuffer): OggPage[] => {
     let dataWindow = new DataWindow(arrayBuffer)

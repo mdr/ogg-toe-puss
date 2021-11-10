@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
 import './App.scss'
-import { OggPage } from './OggPage'
-import { parseOggPages } from './oggParser'
-import { extractBitstreams, LogicalBitstream } from './packetExtractor'
+import { OggPage } from '../audio/OggPage'
+import { parseOggPages } from '../audio/oggParser'
+import { extractBitstreams, LogicalBitstream } from '../audio/packetExtractor'
 import { OggPagesTab } from './OggPagesTab'
 import { PacketsTab } from './PacketsTab'
 import { ShowHexProvider } from './showHexHook'

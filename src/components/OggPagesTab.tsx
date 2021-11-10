@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
 import './App.scss'
-import { OggPage } from './OggPage'
+import { OggPage } from '../audio/OggPage'
 import { OggPageHeaderTable } from './OggPageHeaderTable'
 import _ from 'lodash'
 import { useShowHex } from './showHexHook'
-import { Option } from './util'
-import { Bytes } from './types'
+import { Option } from '../util/util'
+import { Bytes } from '../util/types'
 export interface OggPagesTabProps {
   readonly oggPages: OggPage[]
 }

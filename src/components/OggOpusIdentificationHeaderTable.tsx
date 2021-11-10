@@ -1,4 +1,4 @@
-import { OggOpusIdentificationHeader } from './OggOpusIdentificationHeader'
+import { OggOpusIdentificationHeader } from '../audio/OggOpusIdentificationHeader'
 
 export interface OggOpusIdentificationHeaderTableProps {
   header: OggOpusIdentificationHeader

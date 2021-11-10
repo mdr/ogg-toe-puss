@@ -1,4 +1,4 @@
-import { OggOpusCommentHeader } from './OggOpusCommentHeader'
+import { OggOpusCommentHeader } from '../audio/OggOpusCommentHeader'
 
 export interface OggOpusCommentHeaderTableProps {
   header: OggOpusCommentHeader
