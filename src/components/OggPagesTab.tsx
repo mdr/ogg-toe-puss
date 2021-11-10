@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './App.scss'
 import { OggPage } from '../audio/OggPage'
@@ -14,6 +14,7 @@ export interface OggPagesTabProps {
 export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
   const { showHex } = useShowHex()
   const [pageNumber, setPageNumber] = useState<number>(0)
+  useEffect(() => setPageNumber(0), [oggPages])
   const oggPage = pageNumber < oggPages.length ? oggPages[pageNumber] : undefined
   return (
     <div className="ogg-pages-tab">

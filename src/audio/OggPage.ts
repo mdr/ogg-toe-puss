@@ -106,7 +106,7 @@ export class OggPage {
 
   getSegmentHex = (segmentIndex: number): string => {
     const segment = this.segments[segmentIndex]
-    return asHexString(segment)
+    return asHexString(segment, true)
   }
 
 }

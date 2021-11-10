@@ -34,13 +34,14 @@ const Main = () => {
   const [bitstreams, setBitstreams] = useState<LogicalBitstream[]>([])
   const [tab, setTab] = useState<AppTab>(AppTab.OGG_PAGES)
   const { showHex, setShowHex } = useShowHex()
+  const importFile = (arrayBuffer: ArrayBuffer) => {
+    const oggPages = parseOggPages(arrayBuffer)
+    const bitstreams = extractBitstreams(oggPages)
+    setOggPages(oggPages)
+    setBitstreams(bitstreams)
+  }
   useEffect(() => {
-    fetchBinaryFile(opusFile).then((arrayBuffer) => {
-      const oggPages = parseOggPages(arrayBuffer)
-      const bitstreams = extractBitstreams(oggPages)
-      setOggPages(oggPages)
-      setBitstreams(bitstreams)
-    })
+    fetchBinaryFile(opusFile).then(importFile)
   }, [])
   return (
     <div className="app">
@@ -54,15 +55,7 @@ const Main = () => {
         <label htmlFor="showHex">Show Hex</label>
         <input id="showHex" onChange={() => setShowHex(!showHex)} checked={showHex} type="checkbox" />
       </div>
-      <Dropzone
-        onDrop={async (file) => {
-          const arrayBuffer = await file.arrayBuffer()
-          const oggPages = parseOggPages(arrayBuffer)
-          const bitstreams = extractBitstreams(oggPages)
-          setOggPages(oggPages)
-          setBitstreams(bitstreams)
-        }}
-      />
+      <Dropzone onDrop={async (file) => importFile(await file.arrayBuffer())} />
       {tab === AppTab.OGG_PAGES && <OggPagesTab oggPages={oggPages ?? []} />}
       {tab === AppTab.PACKETS && <OggPacketsTab streams={bitstreams} />}
     </div>

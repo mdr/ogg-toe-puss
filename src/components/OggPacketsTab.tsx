@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './App.scss'
 import { LogicalBitstream } from '../audio/packetExtractor'
@@ -47,7 +47,12 @@ export const OggPacketsTab = ({ streams }: PacketsTabProps) => {
   const [selectedStreamSerialNumber, setSelectedStreamSerialNumber] = useState<BitstreamSerialNumber>(
     streams[0].serialNumber
   )
-  const stream = streams.find((stream) => stream.serialNumber === selectedStreamSerialNumber)!!
+  useEffect(() => setSelectedStreamSerialNumber(streams[0].serialNumber), [streams])
+
+  const stream = streams.find((stream) => stream.serialNumber === selectedStreamSerialNumber)
+  if (stream === undefined) {
+    return <></>
+  }
   return (
     <div>
       <h1>Ogg Packets</h1>
@@ -100,7 +105,7 @@ export const OggPacketsTab = ({ streams }: PacketsTabProps) => {
           )}
           {showHex && (
             <div className="raw-hex" key={`packet-hex-${i}`}>
-              {asHexString(packet)}
+              {asHexString(packet, true)}
             </div>
           )}
         </React.Fragment>
