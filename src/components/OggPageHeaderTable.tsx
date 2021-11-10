@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { OggPage } from '../audio/OggPage'
-import { ByteTableRowSpec, CellInterpretationType, ByteTableCellSpec, ByteTableRow, ByteTable } from './ByteTableRow'
+import { ByteTableRowSpec, CellInterpretationType, ByteTableCellSpec, ByteTable } from './ByteTableRow'
 export interface OggPageTableProps {
   page: OggPage
   showHex: boolean
@@ -17,8 +17,6 @@ const describeHeaderType = (page: OggPage): string => {
 export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
   const rowSpecs: ByteTableRowSpec[] = [
     {
-      startByte: 0,
-      endByte: 3,
       cells: [
         {
           width: 4,
@@ -33,8 +31,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
       ],
     },
     {
-      startByte: 4,
-      endByte: 7,
       cells: [
         {
           width: 1,
@@ -64,8 +60,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
       ],
     },
     {
-      startByte: 8,
-      endByte: 11,
       cells: [
         {
           width: 4,
@@ -80,8 +74,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
       ],
     },
     {
-      startByte: 12,
-      endByte: 15,
       cells: [
         {
           width: 2,
@@ -101,8 +93,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
       ],
     },
     {
-      startByte: 16,
-      endByte: 19,
       cells: [
         {
           width: 2,
@@ -122,8 +112,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
       ],
     },
     {
-      startByte: 20,
-      endByte: 23,
       cells: [
         {
           width: 2,
@@ -143,8 +131,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
       ],
     },
     {
-      startByte: 24,
-      endByte: 27,
       cells: [
         {
           width: 2,

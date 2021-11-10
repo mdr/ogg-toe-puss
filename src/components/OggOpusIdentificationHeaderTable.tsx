@@ -10,8 +10,6 @@ export interface OggOpusIdentificationHeaderTableProps {
 export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIdentificationHeaderTableProps) => {
   const rowSpecs: ByteTableRowSpec[] = [
     {
-      startByte: 0,
-      endByte: 3,
       cells: [
         {
           width: 4,
@@ -26,8 +24,6 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
       ],
     },
     {
-      startByte: 4,
-      endByte: 7,
       cells: [
         {
           width: 4,
@@ -41,8 +37,6 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
       ],
     },
     {
-      startByte: 8,
-      endByte: 11,
       cells: [
         {
           width: 1,
@@ -77,8 +71,6 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
       ],
     },
     {
-      startByte: 12,
-      endByte: 15,
       cells: [
         {
           width: 4,
@@ -93,8 +85,6 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
       ],
     },
     {
-      startByte: 16,
-      endByte: 19,
       cells: [
         {
           width: 2,

@@ -10,8 +10,6 @@ export interface OggOpusCommentHeaderTableProps {
 export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHeaderTableProps) => {
   const rowSpecs: ByteTableRowSpec[] = [
     {
-      startByte: 0,
-      endByte: 3,
       cells: [
         {
           width: 4,
@@ -26,8 +24,6 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
       ],
     },
     {
-      startByte: 4,
-      endByte: 7,
       cells: [
         {
           width: 4,
@@ -41,8 +37,6 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
       ],
     },
     {
-      startByte: 8,
-      endByte: 11,
       cells: [
         {
           width: 4,
@@ -59,8 +53,6 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
     ..._.chunk(header.vendorString, 4).map(
       (piece, i) =>
         ({
-          startByte: 12 + i * 4,
-          endByte: 12 + i * 4 + 3,
           cells: [
             {
               width: piece.length,

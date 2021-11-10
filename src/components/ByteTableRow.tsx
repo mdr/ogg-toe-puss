@@ -1,6 +1,7 @@
 import { OggPage } from '../audio/OggPage'
 import { Bytes } from '../util/types'
 import classNames from 'classnames'
+import _ from 'lodash'
 export interface OggPageTableProps {
   page: OggPage
   showHex: boolean
@@ -20,19 +21,21 @@ export const ByteTable = ({ showHex, rows }: ByteTableProps) => (
   <table className="byte-table">
     <tbody>
       {rows.map((row, i) => (
-        <ByteTableRow key={`byte-table-row-${i}`} showHex={showHex} rowSpec={row} />
+        <ByteTableRow key={`byte-table-row-${i}`} showHex={showHex} rowSpec={row} startByte={i * 4} />
       ))}
     </tbody>
   </table>
 )
 
 export interface ByteTableRowProps {
+  startByte: number
   showHex: boolean
   rowSpec: ByteTableRowSpec
 }
 
-export const ByteTableRow = ({ showHex, rowSpec }: ByteTableRowProps) => {
-  const { startByte, endByte, cells } = rowSpec
+export const ByteTableRow = ({ startByte, showHex, rowSpec }: ByteTableRowProps) => {
+  const { cells } = rowSpec
+  const endByte = startByte + _.sumBy(cells, cell => cell.width) - 1
   return (
     <>
       <tr>
@@ -94,8 +97,6 @@ export const ByteTableRow = ({ showHex, rowSpec }: ByteTableRowProps) => {
 }
 
 export interface ByteTableRowSpec {
-  startByte: Bytes
-  endByte: Bytes
   cells: ByteTableCellSpec[]
 }
 
