@@ -1,181 +1,131 @@
+import _ from 'lodash'
 import { OggOpusIdentificationHeader } from '../audio/OggOpusIdentificationHeader'
+import { ByteTableRow, ByteTableRowSpec, CellInterpretationType } from './ByteTableRow'
 
 export interface OggOpusIdentificationHeaderTableProps {
   header: OggOpusIdentificationHeader
   showHex: boolean
 }
 
-export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIdentificationHeaderTableProps) => (
-  <table className="id-header-table byte-table">
-    <tbody>
-      <tr>
-        <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
-          0-3
-        </th>
-        <td className="byte-table__header-cell byte-table__cell-style-1" colSpan={4}>
-          Magic Signature
-        </td>
-      </tr>
-      {showHex && (
-        <tr>
-          <td className="byte-table__hex-cell byte-table__cell-style-1">
-            {header.getMagicSignatureHex(0)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-1">
-            {header.getMagicSignatureHex(1)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-1">
-            {header.getMagicSignatureHex(2)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-1">
-            {header.getMagicSignatureHex(3)}
-          </td>
-        </tr>
-      )}
-      <tr>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-1">
-          {header.magicSignature[0]}
-        </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-1">
-          {header.magicSignature[1]}
-        </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-1">
-          {header.magicSignature[2]}
-        </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-1">
-          {header.magicSignature[3]}
-        </td>
-      </tr>
-
-      <tr>
-        <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
-          4-7
-        </th>
-        <td className="byte-table__header-cell byte-table__cell-style-1" colSpan={4}>&nbsp;</td>
-      </tr>
-      {showHex && (
-        <tr>
-          <td className="byte-table__hex-cell byte-table__cell-style-1">
-            {header.getMagicSignatureHex(0)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-1">
-            {header.getMagicSignatureHex(1)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-1">
-            {header.getMagicSignatureHex(2)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-1">
-            {header.getMagicSignatureHex(3)}
-          </td>
-        </tr>
-      )}
-      <tr>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-1">
-          {header.magicSignature[4]}
-        </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-1">
-          {header.magicSignature[5]}
-        </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-1">
-          {header.magicSignature[6]}
-        </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-1">
-          {header.magicSignature[7]}
-        </td>
-      </tr>
-      
-      <tr>
-        <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
-          8-11
-        </th>
-        <td className="byte-table__header-cell byte-table__cell-style-2">Version</td>
-        <td className="byte-table__header-cell byte-table__cell-style-3 byte-table__border-left">Channel Count</td>
-        <td className="byte-table__header-cell byte-table__cell-style-4 byte-table__border-left" colSpan={2}>Pre-skip</td>
-      </tr>
-      {showHex && (
-        <tr>
-          <td className="byte-table__hex-cell byte-table__cell-style-2">
-            {header.versionHex}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-3 byte-table__border-left">
-            {header.channelCountHex}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-4 byte-table__border-left">
-            {header.getPreSkipHex(0)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-4">
-            {header.getPreSkipHex(1)}
-          </td>
-        </tr>
-      )}
-      <tr>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-2">
-          {header.version}
-        </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-3 byte-table__border-left">
-          {header.channelCount}
-        </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-4 byte-table__border-left" colSpan={2}>
-          {header.preSkip}
-        </td>
-      </tr>
-
-      <tr>
-        <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
-          12-15
-        </th>
-        <td className="byte-table__header-cell byte-table__cell-style-5" colSpan={4}>Input Sample Rate</td>
-      </tr>
-      {showHex && (
-        <tr>
-          <td className="byte-table__hex-cell byte-table__cell-style-5">
-            {header.getInputSampleRateHex(0)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-5">
-            {header.getInputSampleRateHex(1)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-5">
-            {header.getInputSampleRateHex(2)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-5">
-            {header.getInputSampleRateHex(3)}
-          </td>
-        </tr>
-      )}
-      <tr>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-5" colSpan={4}>
-          {header.inputSampleRate}
-        </td>
-      </tr>
-
-      <tr>
-        <th className="byte-table__byte-header-cell" rowSpan={showHex ? 3 : 2}>
-          16-19
-        </th>
-        <td className="byte-table__header-cell byte-table__cell-style-6" colSpan={2}>Output Gain</td>
-        <td className="byte-table__header-cell byte-table__cell-style-7 byte-table__border-left byte-table__border-right">Mapping Family</td>
-      </tr>
-      {showHex && (
-        <tr>
-          <td className="byte-table__hex-cell byte-table__cell-style-6">
-            {header.getOutputGainHex(0)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-6">
-            {header.getOutputGainHex(1)}
-          </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-7 byte-table__border-left byte-table__border-right">
-            {header.channelMappingFamilyHex}
-          </td>
-        </tr>
-      )}
-      <tr>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-6" colSpan={2}>
-          {header.outputGain}
-        </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-7 byte-table__border-left byte-table__border-right">
-          {header.channelMappingFamily}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-)
+export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIdentificationHeaderTableProps) => {
+  const row1Spec: ByteTableRowSpec = {
+    startByte: 0,
+    endByte: 3,
+    cells: [
+      {
+        width: 4,
+        colour: 1,
+        header: 'Magic Signature',
+        interpretation: {
+          type: CellInterpretationType.MULTIPLE,
+          labels: _.range(4).map((i) => header.magicSignature[i]),
+        },
+        hex: _.range(4).map(header.getMagicSignatureHex),
+      },
+    ],
+  }
+  const row2Spec: ByteTableRowSpec = {
+    startByte: 4,
+    endByte: 7,
+    cells: [
+      {
+        width: 4,
+        colour: 1,
+        interpretation: {
+          type: CellInterpretationType.MULTIPLE,
+          labels: _.range(4, 4 + 4).map((i) => header.magicSignature[i]),
+        },
+        hex: _.range(4, 4 + 4).map(header.getMagicSignatureHex),
+      },
+    ],
+  }
+  const row3Spec: ByteTableRowSpec = {
+    startByte: 8,
+    endByte: 11,
+    cells: [
+      {
+        width: 1,
+        colour: 2,
+        header: 'Version',
+        interpretation: {
+          type: CellInterpretationType.SINGLE,
+          label: header.version.toString(),
+        },
+        hex: [header.versionHex],
+      },
+      {
+        width: 1,
+        colour: 3,
+        header: 'Channel Count',
+        interpretation: {
+          type: CellInterpretationType.SINGLE,
+          label: header.channelCount.toString(),
+        },
+        hex: [header.channelCountHex],
+      },
+      {
+        width: 2,
+        colour: 4,
+        header: 'Pre-skip',
+        interpretation: {
+          type: CellInterpretationType.SINGLE,
+          label: header.preSkip.toString(),
+        },
+        hex: _.range(2).map(header.getPreSkipHex),
+      },
+    ],
+  }
+  const row4Spec: ByteTableRowSpec = {
+    startByte: 12,
+    endByte: 15,
+    cells: [
+      {
+        width: 4,
+        colour: 5,
+        header: 'Input Sample Rate',
+        interpretation: {
+          type: CellInterpretationType.SINGLE,
+          label: header.inputSampleRate.toString(),
+        },
+        hex: _.range(4).map(header.getInputSampleRateHex),
+      },
+    ],
+  }
+  const row5Spec: ByteTableRowSpec = {
+    startByte: 16,
+    endByte: 19,
+    cells: [
+      {
+        width: 2,
+        colour: 6,
+        header: 'Output Gain',
+        interpretation: {
+          type: CellInterpretationType.SINGLE,
+          label: header.outputGain.toString(),
+        },
+        hex: _.range(2).map(header.getOutputGainHex),
+      },
+      {
+        width: 1,
+        colour: 7,
+        header: 'Mapping Family',
+        interpretation: {
+          type: CellInterpretationType.SINGLE,
+          label: header.channelMappingFamily.toString(),
+        },
+        hex: [header.channelMappingFamilyHex],
+      },
+    ],
+  }
+  return (
+    <table className="id-header-table byte-table">
+      <tbody>
+        <ByteTableRow showHex={showHex} rowSpec={row1Spec} />
+        <ByteTableRow showHex={showHex} rowSpec={row2Spec} />
+        <ByteTableRow showHex={showHex} rowSpec={row3Spec} />
+        <ByteTableRow showHex={showHex} rowSpec={row4Spec} />
+        <ByteTableRow showHex={showHex} rowSpec={row5Spec} />
+      </tbody>
+    </table>
+  )
+}
