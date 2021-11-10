@@ -55,12 +55,38 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
       },
     ],
   }
+  const vendorStringRowSpecs: ByteTableRowSpec[] = _.chunk(header.vendorString, 4).map(
+    (piece, i) =>
+      ({
+        startByte: 12 + i * 4,
+        endByte: 12 + i * 4 + 3,
+        cells: [
+          {
+            width: piece.length,
+            colour: 5,
+            header: i === 0 ? 'Vendor String' : undefined,
+            interpretation:
+              i === 0
+                ? {
+                    type: CellInterpretationType.SINGLE,
+                    label: header.vendorString,
+                  }
+                : undefined,
+            hex: _.range(i * 4, i * 4 + 4).map(header.getVendorStringHex),
+          },
+        ],
+      } as ByteTableRowSpec)
+  )
+
   return (
     <table className="comment-header-table byte-table">
       <tbody>
-      <ByteTableRow showHex={showHex} rowSpec={row1Spec} />
-      <ByteTableRow showHex={showHex} rowSpec={row2Spec} />
-      <ByteTableRow showHex={showHex} rowSpec={row3Spec} />
+        <ByteTableRow showHex={showHex} rowSpec={row1Spec} />
+        <ByteTableRow showHex={showHex} rowSpec={row2Spec} />
+        <ByteTableRow showHex={showHex} rowSpec={row3Spec} />
+        {vendorStringRowSpecs.map((spec) => (
+          <ByteTableRow showHex={showHex} rowSpec={spec} />
+        ))}
       </tbody>
     </table>
   )
