@@ -29,6 +29,12 @@ export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
       <h2>Ogg Page Header</h2>
       {oggPage && (
         <>
+          <p>
+            <a className="rfc-link" href="https://datatracker.ietf.org/doc/html/rfc3533#section-6">
+              RFC 3533 - 6. The Ogg page format
+            </a>
+          </p>
+
           <OggPageHeaderTable page={oggPage} showHex={showHex} />
           {_.range(0, oggPage.numberOfPageSegments).map((segmentIndex) => (
             <SegmentInfo

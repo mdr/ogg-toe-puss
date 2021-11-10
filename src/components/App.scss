@@ -86,12 +86,11 @@ button {
 }
 
 .byte-table__cell-style-1 {
-  background-color: rgb(255, 204, 204);
+  background-color: rgb(255, 218, 218);
 }
 
 .byte-table__cell-style-1.byte-table__interpretation-cell {
   font-family: 'Courier New', Courier, monospace;
-  background-color: rgb(255, 204, 204);
 }
 
 .byte-table__cell-style-2 {
@@ -103,7 +102,7 @@ button {
 }
 
 .byte-table__cell-style-4 {
-  background-color: rgb(220, 252, 208);
+  background-color: rgb(228, 253, 219);
 }
 
 .byte-table__cell-style-5 {
@@ -111,19 +110,19 @@ button {
 }
 
 .byte-table__cell-style-6 {
-  background-color: rgb(215, 205, 252);
+  background-color: rgb(227, 221, 252);
 }
 
 .byte-table__cell-style-7 {
-  background-color: rgb(233, 187, 255);
+  background-color: rgb(241, 211, 255);
 }
 
 .byte-table__cell-style-8 {
-  background-color: rgb(250, 226, 247);
+  background-color: rgb(255, 219, 250);
 }
 
 .byte-table__cell-style-9 {
-  background-color: rgb(221, 221, 221);
+  background-color: rgb(231, 231, 231);
 }
 
 .raw-hex {
@@ -131,4 +130,13 @@ button {
   border: 1px dashed black;
   padding: 5px;
   overflow-wrap: break-word;
+}
+
+.rfc-link {
+  padding-bottom: 5px;
+}
+
+.bitstream-serial-number-radio-label {
+  font-family: 'Courier New', Courier, monospace;
+  padding-left: 5px;
 }

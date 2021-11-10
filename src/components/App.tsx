@@ -5,9 +5,10 @@ import { LogicalBitstream, extractBitstreams } from '../audio/packetExtractor'
 
 import './App.scss'
 import { OggPagesTab } from './OggPagesTab'
-import { PacketsTab } from './PacketsTab'
+import { OggPacketsTab } from './OggPacketsTab'
 import { ShowHexProvider, useShowHex } from './showHexHook'
 
+//const opusFile = `${process.env.PUBLIC_URL}/small.ogv`
 const opusFile = `${process.env.PUBLIC_URL}/example_0.opus`
 
 enum AppTab {
@@ -53,7 +54,7 @@ const Main = () => {
         <input id="showHex" onChange={() => setShowHex(!showHex)} checked={showHex} type="checkbox" />
       </div>
       {tab === AppTab.OGG_PAGES && <OggPagesTab oggPages={oggPages ?? []} />}
-      {tab === AppTab.PACKETS && <PacketsTab streams={bitstreams} />}
+      {tab === AppTab.PACKETS && <OggPacketsTab streams={bitstreams} />}
     </div>
   )
 }
