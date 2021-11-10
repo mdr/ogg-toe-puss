@@ -16,15 +16,11 @@ export interface PacketsTabProps {
 
 export const PacketsTab = ({ streams }: PacketsTabProps) => {
   const stream = streams[0]
-  const { showHex, setShowHex } = useShowHex()
+  const { showHex } = useShowHex()
   return (
     <div>
       <h1>Ogg Packets</h1>
       <p>Bitstream serial number: {stream.serialNumber}</p>
-      <div className="show-hex-checkbox">
-        <label htmlFor="showHex">Show Hex</label>
-        <input id="showHex" onChange={() => setShowHex(!showHex)} checked={showHex} type="checkbox" />
-      </div>
       {stream.packets.map((packet, i) => (
         <React.Fragment key={`packet-${i}`}>
           <h2>

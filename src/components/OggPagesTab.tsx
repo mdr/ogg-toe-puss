@@ -12,7 +12,7 @@ export interface OggPagesTabProps {
 }
 
 export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
-  const { showHex, setShowHex } = useShowHex()
+  const { showHex } = useShowHex()
   const [pageNumber, setPageNumber] = useState<number>(0)
   const oggPage = pageNumber < oggPages.length ? oggPages[pageNumber] : undefined
   return (
@@ -26,10 +26,6 @@ export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
       <button onClick={() => setPageNumber(pageNumber + 1)} disabled={pageNumber >= (oggPages?.length ?? 0) - 1}>
         Next
       </button>
-      <div className="show-hex-checkbox">
-        <label htmlFor="showHex">Show Hex</label>
-        <input id="showHex" onChange={() => setShowHex(!showHex)} checked={showHex} type="checkbox" />
-      </div>
       <h2>Ogg Page Header</h2>
       {oggPage && (
         <>
