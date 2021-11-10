@@ -11,6 +11,21 @@ export enum CellInterpretationType {
   MULTIPLE = 'MULTIPLE',
 }
 
+export interface ByteTableProps {
+  showHex: boolean
+  rows: ByteTableRowSpec[]
+}
+
+export const ByteTable = ({ showHex, rows }: ByteTableProps) => (
+  <table className="byte-table">
+    <tbody>
+      {rows.map((row, i) => (
+        <ByteTableRow key={`byte-table-row-${i}`} showHex={showHex} rowSpec={row} />
+      ))}
+    </tbody>
+  </table>
+)
+
 export interface ByteTableRowProps {
   showHex: boolean
   rowSpec: ByteTableRowSpec

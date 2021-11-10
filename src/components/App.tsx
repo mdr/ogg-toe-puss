@@ -9,7 +9,6 @@ import { OggPagesTab } from './OggPagesTab'
 import { ShowHexProvider, useShowHex } from './showHexHook'
 import { BitstreamsTab } from './BitstreamsTab'
 
-//const opusFile = `${process.env.PUBLIC_URL}/small.ogv`
 const opusFile = `${process.env.PUBLIC_URL}/example_0.opus`
 
 enum AppTab {
