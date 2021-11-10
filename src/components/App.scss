@@ -138,5 +138,12 @@ button {
 
 .bitstream-serial-number-radio-label {
   font-family: 'Courier New', Courier, monospace;
-  padding-left: 5px;
+  margin-left: 5px;
+}
+
+.dropzone {
+  display: inline-block;
+  border: 2px solid blue;
+  padding: 10px;
+  margin-top: 10px;
 }

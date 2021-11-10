@@ -84,8 +84,8 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
         <ByteTableRow showHex={showHex} rowSpec={row1Spec} />
         <ByteTableRow showHex={showHex} rowSpec={row2Spec} />
         <ByteTableRow showHex={showHex} rowSpec={row3Spec} />
-        {vendorStringRowSpecs.map((spec) => (
-          <ByteTableRow showHex={showHex} rowSpec={spec} />
+        {vendorStringRowSpecs.map((spec, i) => (
+          <ByteTableRow key={i} showHex={showHex} rowSpec={spec} />
         ))}
       </tbody>
     </table>

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { OggPage } from '../audio/OggPage'
 import { parseOggPages } from '../audio/oggParser'
 import { LogicalBitstream, extractBitstreams } from '../audio/packetExtractor'
+import { useDropzone } from 'react-dropzone'
 
 import './App.scss'
 import { OggPagesTab } from './OggPagesTab'
@@ -53,8 +54,33 @@ const Main = () => {
         <label htmlFor="showHex">Show Hex</label>
         <input id="showHex" onChange={() => setShowHex(!showHex)} checked={showHex} type="checkbox" />
       </div>
+      <Dropzone
+        onDrop={async (file) => {
+          const arrayBuffer = await file.arrayBuffer()
+          const oggPages = parseOggPages(arrayBuffer)
+          const bitstreams = extractBitstreams(oggPages)
+          setOggPages(oggPages)
+          setBitstreams(bitstreams)
+        }}
+      />
       {tab === AppTab.OGG_PAGES && <OggPagesTab oggPages={oggPages ?? []} />}
       {tab === AppTab.PACKETS && <OggPacketsTab streams={bitstreams} />}
+    </div>
+  )
+}
+
+interface DropzoneProps {
+  onDrop(file: File): void
+}
+
+const Dropzone = ({ onDrop }: DropzoneProps) => {
+  const onDropAccepted = useCallback((acceptedFiles: File[]) => onDrop(acceptedFiles[0]), [onDrop])
+  const { getRootProps, getInputProps } = useDropzone({ onDropAccepted })
+
+  return (
+    <div className="dropzone" {...getRootProps()}>
+      <input {...getInputProps()} />
+      Click here or drop an Ogg file to upload
     </div>
   )
 }
