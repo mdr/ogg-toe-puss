@@ -6,13 +6,19 @@ import { parseOggPages } from './oggParser'
 import { extractBitstreams, LogicalBitstream } from './packetExtractor'
 import { OggPagesTab } from './OggPagesTab'
 import { PacketsTab } from './PacketsTab'
+import { ShowHexProvider } from './showHexHook'
 
 const opusFile = `${process.env.PUBLIC_URL}/example_0.opus`
-//const opusFile = `${process.env.PUBLIC_URL}/sample1.opus`
 
 enum AppTab {
   OGG_PAGES = 'OGG_PAGES',
   PACKETS = 'PACKETS',
+}
+
+const fetchBinaryFile = async (url: string): Promise<ArrayBuffer> => {
+  const response = await fetch(opusFile)
+  const blob = await response.blob()
+  return await blob.arrayBuffer()
 }
 
 export const App = () => {
@@ -20,9 +26,7 @@ export const App = () => {
   const [bitstreams, setBitstreams] = useState<LogicalBitstream[]>([])
   const [tab, setTab] = useState<AppTab>(AppTab.OGG_PAGES)
   useEffect(() => {
-    fetch(opusFile).then(async (response) => {
-      const blob = await response.blob()
-      const arrayBuffer = await blob.arrayBuffer()
+    fetchBinaryFile(opusFile).then((arrayBuffer) => {
       const oggPages = parseOggPages(arrayBuffer)
       const bitstreams = extractBitstreams(oggPages)
       setOggPages(oggPages)
@@ -30,16 +34,18 @@ export const App = () => {
     })
   }, [])
   return (
-    <div className="app">
-      <button onClick={() => setTab(AppTab.OGG_PAGES)} disabled={tab === AppTab.OGG_PAGES}>
-        Ogg Pages
-      </button>
-      <button onClick={() => setTab(AppTab.PACKETS)} disabled={tab === AppTab.PACKETS}>
-        Ogg Packets
-      </button>
+    <ShowHexProvider>
+      <div className="app">
+        <button onClick={() => setTab(AppTab.OGG_PAGES)} disabled={tab === AppTab.OGG_PAGES}>
+          Ogg Pages
+        </button>
+        <button onClick={() => setTab(AppTab.PACKETS)} disabled={tab === AppTab.PACKETS}>
+          Ogg Packets
+        </button>
 
-      {tab === AppTab.OGG_PAGES && <OggPagesTab oggPages={oggPages ?? []} />}
-      {tab === AppTab.PACKETS && <PacketsTab streams={bitstreams} />}
-    </div>
+        {tab === AppTab.OGG_PAGES && <OggPagesTab oggPages={oggPages ?? []} />}
+        {tab === AppTab.PACKETS && <PacketsTab streams={bitstreams} />}
+      </div>
+    </ShowHexProvider>
   )
 }

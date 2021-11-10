@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 
 import './App.scss'
-import { OggPage } from './OggPage'
+import { Bytes, OggPage } from './OggPage'
 import { OggPageHeaderTable } from './OggPageHeaderTable'
 import _ from 'lodash'
-
+import { useShowHex } from './showHexHook'
+import { Option } from './util'
 export interface OggPagesTabProps {
   readonly oggPages: OggPage[]
 }
 
 export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
-  const [showHex, setShowHex] = useState<boolean>(false)
+  const { showHex, setShowHex } = useShowHex()
   const [pageNumber, setPageNumber] = useState<number>(0)
   const oggPage = pageNumber < oggPages.length ? oggPages[pageNumber] : undefined
   return (
@@ -33,19 +34,30 @@ export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
         <>
           <OggPageHeaderTable page={oggPage} showHex={showHex} />
           {_.range(0, oggPage.numberOfPageSegments).map((segmentIndex) => (
-            <React.Fragment key={`segment-${segmentIndex}`}>
-              <h2 key={`segment-header-${segmentIndex}`}>
-                Segment {segmentIndex + 1} ({oggPage.getSegmentSize(segmentIndex)} bytes)
-              </h2>
-              {showHex && (
-                <div className="raw-hex" key={`segment-hex-${segmentIndex}`}>
-                  {oggPage.getSegmentHex(segmentIndex)}
-                </div>
-              )}
-            </React.Fragment>
+            <SegmentInfo
+              key={`segment-${segmentIndex}`}
+              number={segmentIndex + 1}
+              size={oggPage.getSegmentSize(segmentIndex)}
+              hex={showHex ? oggPage.getSegmentHex(segmentIndex) : undefined}
+            />
           ))}
         </>
       )}
     </div>
   )
 }
+
+interface SegmentInfoProps {
+  number: number
+  size: Bytes
+  hex: Option<string>
+}
+
+const SegmentInfo = ({ number, size, hex }: SegmentInfoProps) => (
+  <>
+    <h2>
+      Segment {number} ({size} bytes)
+    </h2>
+    {hex && <div className="raw-hex">{hex}</div>}
+  </>
+)

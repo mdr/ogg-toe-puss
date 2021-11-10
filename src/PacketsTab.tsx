@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import './App.scss'
 import { LogicalBitstream } from './packetExtractor'
@@ -8,6 +8,7 @@ import { DataWindow } from './DataWindow'
 import { OggOpusIdentificationHeaderTable } from './OggOpusIdentificationHeaderTable'
 import { OggOpusCommentHeaderTable } from './OggOpusCommentHeaderTable'
 import { OggOpusCommentHeader } from './OggOpusCommentHeader'
+import { useShowHex } from './showHexHook'
 
 export interface PacketsTabProps {
   streams: LogicalBitstream[]
@@ -15,7 +16,7 @@ export interface PacketsTabProps {
 
 export const PacketsTab = ({ streams }: PacketsTabProps) => {
   const stream = streams[0]
-  const [showHex, setShowHex] = useState<boolean>(false)
+  const { showHex, setShowHex } = useShowHex()
   return (
     <div>
       <h1>Ogg Packets</h1>
@@ -41,10 +42,7 @@ export const PacketsTab = ({ streams }: PacketsTabProps) => {
           {i === 1 && (
             <>
               <h3>Ogg Opus Comment Header</h3>
-              <OggOpusCommentHeaderTable
-                header={new OggOpusCommentHeader(new DataWindow(packet))}
-                showHex={showHex}
-              />
+              <OggOpusCommentHeaderTable header={new OggOpusCommentHeader(new DataWindow(packet))} showHex={showHex} />
             </>
           )}
           {showHex && (
