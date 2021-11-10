@@ -1,8 +1,7 @@
 import _ from "lodash"
 import { DataWindow } from "./DataWindow"
 import { asHexPair, asHexString } from "./hexUtils"
-
-export type Bytes = number
+import { Bytes } from "./types"
 
 export class OggPage {
 
