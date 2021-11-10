@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-
-import './App.scss'
 import { OggPage } from '../audio/OggPage'
 import { parseOggPages } from '../audio/oggParser'
-import { extractBitstreams, LogicalBitstream } from '../audio/packetExtractor'
+import { LogicalBitstream, extractBitstreams } from '../audio/packetExtractor'
+
+import './App.scss'
 import { OggPagesTab } from './OggPagesTab'
 import { PacketsTab } from './PacketsTab'
 import { ShowHexProvider } from './showHexHook'
@@ -42,7 +42,6 @@ export const App = () => {
         <button onClick={() => setTab(AppTab.PACKETS)} disabled={tab === AppTab.PACKETS}>
           Ogg Packets
         </button>
-
         {tab === AppTab.OGG_PAGES && <OggPagesTab oggPages={oggPages ?? []} />}
         {tab === AppTab.PACKETS && <PacketsTab streams={bitstreams} />}
       </div>

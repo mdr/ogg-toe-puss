@@ -1,7 +1,5 @@
-import { OggPage } from "./OggPage"
+import { BitstreamSerialNumber, OggPage } from "./OggPage"
 import _ from 'lodash'
-
-export type BitstreamSerialNumber = string
 
 export interface LogicalBitstream {
     readonly serialNumber: BitstreamSerialNumber

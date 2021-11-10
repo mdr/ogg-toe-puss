@@ -3,6 +3,8 @@ import { DataWindow } from "../util/DataWindow"
 import { asHexPair, asHexString } from "../util/hexUtils"
 import { Bytes } from "../util/types"
 
+export type BitstreamSerialNumber = string
+
 export class OggPage {
 
   constructor(private readonly dataWindow: DataWindow) {
