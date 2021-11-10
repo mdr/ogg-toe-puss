@@ -6,15 +6,15 @@ import { useDropzone } from 'react-dropzone'
 
 import './App.scss'
 import { OggPagesTab } from './OggPagesTab'
-import { OggPacketsTab } from './OggPacketsTab'
 import { ShowHexProvider, useShowHex } from './showHexHook'
+import { BitstreamsTab } from './BitstreamsTab'
 
 //const opusFile = `${process.env.PUBLIC_URL}/small.ogv`
 const opusFile = `${process.env.PUBLIC_URL}/example_0.opus`
 
 enum AppTab {
   OGG_PAGES = 'OGG_PAGES',
-  PACKETS = 'PACKETS',
+  BITSTREAMS = 'BITSTREAMS',
 }
 
 const fetchBinaryFile = async (url: string): Promise<ArrayBuffer> => {
@@ -48,8 +48,8 @@ const Main = () => {
       <button onClick={() => setTab(AppTab.OGG_PAGES)} disabled={tab === AppTab.OGG_PAGES}>
         Ogg Pages
       </button>
-      <button onClick={() => setTab(AppTab.PACKETS)} disabled={tab === AppTab.PACKETS}>
-        Ogg Packets
+      <button onClick={() => setTab(AppTab.BITSTREAMS)} disabled={tab === AppTab.BITSTREAMS}>
+        Logical Bitstreams
       </button>
       <div className="show-hex-checkbox">
         <label htmlFor="showHex">Show Hex</label>
@@ -57,7 +57,7 @@ const Main = () => {
       </div>
       <Dropzone onDrop={async (file) => importFile(await file.arrayBuffer())} />
       {tab === AppTab.OGG_PAGES && <OggPagesTab oggPages={oggPages ?? []} />}
-      {tab === AppTab.PACKETS && <OggPacketsTab streams={bitstreams} />}
+      {tab === AppTab.BITSTREAMS && <BitstreamsTab streams={bitstreams} />}
     </div>
   )
 }
@@ -68,7 +68,7 @@ interface DropzoneProps {
 
 const Dropzone = ({ onDrop }: DropzoneProps) => {
   const onDropAccepted = useCallback((acceptedFiles: File[]) => onDrop(acceptedFiles[0]), [onDrop])
-  const { getRootProps, getInputProps } = useDropzone({ onDropAccepted })
+  const { getRootProps, getInputProps } = useDropzone({ onDropAccepted, accept: ['audio/ogg', 'video/ogg', 'application/ogg', 'audio/opus'] })
 
   return (
     <div className="dropzone" {...getRootProps()}>

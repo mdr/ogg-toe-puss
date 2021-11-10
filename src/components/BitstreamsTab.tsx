@@ -13,9 +13,6 @@ import { BitstreamSerialNumber } from '../audio/OggPage'
 import { Option } from '../util/util'
 import _ from 'lodash'
 
-export interface PacketsTabProps {
-  streams: LogicalBitstream[]
-}
 
 const CodecIdentifier = {
   Opus: [0x4f, 0x70, 0x75, 0x73, 0x48, 0x65, 0x61, 0x64], // 'OpusHead'
@@ -42,7 +39,11 @@ const detectStreamType = (stream: LogicalBitstream): Option<string> => {
   return undefined
 }
 
-export const OggPacketsTab = ({ streams }: PacketsTabProps) => {
+export interface BitstreamsTabProps {
+  streams: LogicalBitstream[]
+}
+
+export const BitstreamsTab = ({ streams }: BitstreamsTabProps) => {
   const { showHex } = useShowHex()
   const [selectedStreamSerialNumber, setSelectedStreamSerialNumber] = useState<BitstreamSerialNumber>(
     streams[0].serialNumber
@@ -55,8 +56,7 @@ export const OggPacketsTab = ({ streams }: PacketsTabProps) => {
   }
   return (
     <div>
-      <h1>Ogg Packets</h1>
-      <h2>Logical Bitstreams</h2>
+      <h1>Logical Bitstreams</h1>
       {streams.map((stream) => (
         <div key={stream.serialNumber}>
           <input
@@ -72,6 +72,7 @@ export const OggPacketsTab = ({ streams }: PacketsTabProps) => {
           </label>
         </div>
       ))}
+      <h2>Ogg Packets</h2>
       {stream.packets.map((packet, i) => (
         <React.Fragment key={`packet-${i}`}>
           <h2>
