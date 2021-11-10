@@ -89,18 +89,18 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
           8-11
         </th>
         <td className="byte-table__header-cell byte-table__cell-style-2">Version</td>
-        <td className="byte-table__header-cell byte-table__cell-style-3 byte-table__starts-mid-table">Channel Count</td>
-        <td className="byte-table__header-cell byte-table__cell-style-4 byte-table__starts-mid-table" colSpan={2}>Pre-skip</td>
+        <td className="byte-table__header-cell byte-table__cell-style-3 byte-table__border-left">Channel Count</td>
+        <td className="byte-table__header-cell byte-table__cell-style-4 byte-table__border-left" colSpan={2}>Pre-skip</td>
       </tr>
       {showHex && (
         <tr>
           <td className="byte-table__hex-cell byte-table__cell-style-2">
             {header.versionHex}
           </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-3 byte-table__starts-mid-table">
+          <td className="byte-table__hex-cell byte-table__cell-style-3 byte-table__border-left">
             {header.channelCountHex}
           </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-4 byte-table__starts-mid-table">
+          <td className="byte-table__hex-cell byte-table__cell-style-4 byte-table__border-left">
             {header.getPreSkipHex(0)}
           </td>
           <td className="byte-table__hex-cell byte-table__cell-style-4">
@@ -112,10 +112,10 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
         <td className="byte-table__interpretation-cell byte-table__cell-style-2">
           {header.version}
         </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-3 byte-table__starts-mid-table">
+        <td className="byte-table__interpretation-cell byte-table__cell-style-3 byte-table__border-left">
           {header.channelCount}
         </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-4 byte-table__starts-mid-table" colSpan={2}>
+        <td className="byte-table__interpretation-cell byte-table__cell-style-4 byte-table__border-left" colSpan={2}>
           {header.preSkip}
         </td>
       </tr>
@@ -153,7 +153,7 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
           16-19
         </th>
         <td className="byte-table__header-cell byte-table__cell-style-6" colSpan={2}>Output Gain</td>
-        <td className="byte-table__header-cell byte-table__cell-style-7 byte-table__starts-mid-table byte-table__border-right">Mapping Family</td>
+        <td className="byte-table__header-cell byte-table__cell-style-7 byte-table__border-left byte-table__border-right">Mapping Family</td>
       </tr>
       {showHex && (
         <tr>
@@ -163,7 +163,7 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
           <td className="byte-table__hex-cell byte-table__cell-style-6">
             {header.getOutputGainHex(1)}
           </td>
-          <td className="byte-table__hex-cell byte-table__cell-style-7 byte-table__starts-mid-table byte-table__border-right">
+          <td className="byte-table__hex-cell byte-table__cell-style-7 byte-table__border-left byte-table__border-right">
             {header.channelMappingFamilyHex}
           </td>
         </tr>
@@ -172,7 +172,7 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
         <td className="byte-table__interpretation-cell byte-table__cell-style-6" colSpan={2}>
           {header.outputGain}
         </td>
-        <td className="byte-table__interpretation-cell byte-table__cell-style-7 byte-table__starts-mid-table byte-table__border-right">
+        <td className="byte-table__interpretation-cell byte-table__cell-style-7 byte-table__border-left byte-table__border-right">
           {header.channelMappingFamily}
         </td>
       </tr>
