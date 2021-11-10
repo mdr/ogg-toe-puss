@@ -2,6 +2,8 @@
   padding: 10px;
 }
 
+$fixed-width-font: 'Courier New', Courier, monospace;
+
 .show-hex-checkbox {
   padding-top: 10px;
 }
@@ -46,6 +48,8 @@ button {
   margin-bottom: 10px;
 }
 
+$byte-table-internal-border: 1px solid black;
+
 .byte-table {
   table-layout: fixed;
   width: 800px;
@@ -56,33 +60,31 @@ button {
   }
 }
 
+.byte-table-row3 {
+  border-bottom: $byte-table-internal-border;
+}
+
+.byte-table__border-right {
+  border-right: $byte-table-internal-border;
+}
+
 .byte-table__byte-header-cell {
-  border-right: 1px solid black;
+  border-right: $byte-table-internal-border;
   text-align: center;
   width: 80px;
 }
 
 .byte-table__header-cell {
   font-weight: bold;
-  border-top: 1px solid black;
-}
-
-.byte-table__border-left {
-  border-left: 1px solid black;
-}
-
-.byte-table__border-right {
-  border-right: 1px solid black;
 }
 
 .byte-table__hex-cell {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: $fixed-width-font;
   padding-top: 5px;
 }
 
 .byte-table__interpretation-cell {
   padding-bottom: 5px;
-  border-bottom: 1px solid black;
 }
 
 .byte-table__cell-style-1 {
@@ -90,7 +92,7 @@ button {
 }
 
 .byte-table__cell-style-1.byte-table__interpretation-cell {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: $fixed-width-font;
 }
 
 .byte-table__cell-style-2 {
@@ -126,7 +128,7 @@ button {
 }
 
 .raw-hex {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: $fixed-width-font;
   border: 1px dashed black;
   padding: 5px;
   overflow-wrap: break-word;
@@ -137,7 +139,7 @@ button {
 }
 
 .bitstream-serial-number-radio-label {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: $fixed-width-font;
   margin-left: 5px;
 }
 

@@ -11,6 +11,7 @@ import { isOggOpusCommentHeader, OggOpusCommentHeader } from '../audio/OggOpusCo
 import { useShowHex } from './showHexHook'
 import { BitstreamSerialNumber } from '../audio/OggPage'
 import { detectStreamType } from '../audio/oggParser'
+import _ from 'lodash'
 
 export interface BitstreamsTabProps {
   streams: LogicalBitstream[]
@@ -41,7 +42,7 @@ export const BitstreamsTab = ({ streams }: BitstreamsTabProps) => {
             onChange={() => setSelectedStreamSerialNumber(stream.serialNumber)}
           />
           <label htmlFor={stream.serialNumber}>
-            <span className="bitstream-serial-number-radio-label">{stream.serialNumber}</span> - {detectStreamType(stream)}
+            <span className="bitstream-serial-number-radio-label">{stream.serialNumber}</span> - {detectStreamType(stream)} - {stream.packets.length} packets - {_.sumBy(stream.packets, packet => packet.byteLength)} bytes
           </label>
         </div>
       ))}

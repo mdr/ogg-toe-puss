@@ -27,7 +27,7 @@ export const ByteTableRow = ({ showHex, rowSpec }: ByteTableRowProps) => {
         {cells.map((cell, i) => (
           <td
             key={`byte-table-header-row-${i}`}
-            className={`byte-table__header-cell byte-table__cell-style-${cell.colour} byte-table__border-left byte-table__border-right`}
+            className={`byte-table__header-cell byte-table__cell-style-${cell.colour} byte-table__border-right`}
             colSpan={cell.width}
           >
             {cell.header ?? <>&nbsp;</>}
@@ -50,7 +50,7 @@ export const ByteTableRow = ({ showHex, rowSpec }: ByteTableRowProps) => {
           )}
         </tr>
       )}
-      <tr>
+      <tr className="byte-table-row3">
         {cells.map((cell, i) =>
           cell.interpretation?.type === CellInterpretationType.MULTIPLE ? (
             cell.interpretation.labels.map((label, j) => (
@@ -66,7 +66,7 @@ export const ByteTableRow = ({ showHex, rowSpec }: ByteTableRowProps) => {
           ) : (
             <td
               key={`byte-table-interpretation-${i}`}
-              className={`byte-table__interpretation-cell byte-table__cell-style-${cell.colour} byte-table__border-left byte-table__border-right`}
+              className={`byte-table__interpretation-cell byte-table__cell-style-${cell.colour} byte-table__border-right`}
               colSpan={cell.width}
             >
               {cell.interpretation?.label ?? <>&nbsp;</>}
