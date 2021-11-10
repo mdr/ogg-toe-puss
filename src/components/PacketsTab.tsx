@@ -3,11 +3,11 @@ import React from 'react'
 import './App.scss'
 import { LogicalBitstream } from '../audio/packetExtractor'
 import { asHexString } from '../util/hexUtils'
-import { OggOpusIdentificationHeader } from '../audio/OggOpusIdentificationHeader'
+import { isOggOpusIdentificationHeader, OggOpusIdentificationHeader } from '../audio/OggOpusIdentificationHeader'
 import { DataWindow } from '../util/DataWindow'
 import { OggOpusIdentificationHeaderTable } from './OggOpusIdentificationHeaderTable'
 import { OggOpusCommentHeaderTable } from './OggOpusCommentHeaderTable'
-import { OggOpusCommentHeader } from '../audio/OggOpusCommentHeader'
+import { isOggOpusCommentHeader, OggOpusCommentHeader } from '../audio/OggOpusCommentHeader'
 import { useShowHex } from './showHexHook'
 
 export interface PacketsTabProps {
@@ -26,7 +26,7 @@ export const PacketsTab = ({ streams }: PacketsTabProps) => {
           <h2>
             Packet {i + 1} ({packet.byteLength} bytes)
           </h2>
-          {i === 0 && (
+          {isOggOpusIdentificationHeader(packet, i) && (
             <>
               <h3>Ogg Opus Identification Header</h3>
               <OggOpusIdentificationHeaderTable
@@ -35,7 +35,7 @@ export const PacketsTab = ({ streams }: PacketsTabProps) => {
               />
             </>
           )}
-          {i === 1 && (
+          {isOggOpusCommentHeader(packet, i) && (
             <>
               <h3>Ogg Opus Comment Header</h3>
               <OggOpusCommentHeaderTable header={new OggOpusCommentHeader(new DataWindow(packet))} showHex={showHex} />

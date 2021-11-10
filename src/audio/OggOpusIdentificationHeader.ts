@@ -1,6 +1,14 @@
 import { DataWindow } from '../util/DataWindow'
 import { asHexPair } from '../util/hexUtils'
 
+export const isOggOpusIdentificationHeader = (packet: ArrayBuffer, packetIndex: number): boolean => {
+  if (packet.byteLength < 8) {
+    return false
+  }
+  const magicSignature = new TextDecoder().decode(packet.slice(0, 8))
+  return packetIndex === 0 && magicSignature === 'OpusHead'
+}
+
 export class OggOpusIdentificationHeader {
   constructor(private readonly dataWindow: DataWindow) {}
 
