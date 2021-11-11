@@ -1,11 +1,11 @@
 import { DataWindow } from '../util/DataWindow'
 
-export const isOggOpusIdentificationHeader = (packet: ArrayBuffer, packetIndex: number): boolean => {
+export const isOggOpusIdentificationHeader = (packet: ArrayBuffer): boolean => {
   if (packet.byteLength < 8) {
     return false
   }
   const magicSignature = new TextDecoder().decode(packet.slice(0, 8))
-  return packetIndex === 0 && magicSignature === 'OpusHead'
+  return magicSignature === 'OpusHead'
 }
 
 export class OggOpusIdentificationHeader {

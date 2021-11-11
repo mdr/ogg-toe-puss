@@ -1,11 +1,11 @@
 import { DataWindow } from '../util/DataWindow'
 
-export const isOggOpusCommentHeader = (packet: ArrayBuffer, packetIndex: number): boolean => {
+export const isOggOpusCommentHeader = (packet: ArrayBuffer): boolean => {
   if (packet.byteLength < 8) {
     return false
   }
   const magicSignature = new TextDecoder().decode(packet.slice(0, 8))
-  return packetIndex === 1 && magicSignature === 'OpusTags'
+  return magicSignature === 'OpusTags'
 }
 export class OggOpusCommentHeader {
   constructor(readonly dataWindow: DataWindow) {}

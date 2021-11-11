@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import './App.scss'
 import { OggPage } from '../audio/OggPage'
@@ -8,6 +8,8 @@ import { useShowHex } from './showHexHook'
 import { Option } from '../util/util'
 import { Bytes } from '../util/types'
 import { asHexString } from '../util/hexUtils'
+import { extractPacketsEntirelyContainedWithinPage } from '../audio/packetExtractor'
+import { OggPacketsList } from './OggPacketsList'
 export interface OggPagesTabProps {
   readonly oggPages: OggPage[]
 }
@@ -17,6 +19,7 @@ export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
   const [pageNumber, setPageNumber] = useState<number>(0)
   useEffect(() => setPageNumber(0), [oggPages])
   const oggPage = pageNumber < oggPages.length ? oggPages[pageNumber] : undefined
+  const packets = oggPage === undefined ? [] : extractPacketsEntirelyContainedWithinPage(oggPage)
   return (
     <div className="ogg-pages-tab">
       <h1>
@@ -36,8 +39,10 @@ export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
               RFC 3533 - 6. The Ogg page format
             </a>
           </p>
-
           <OggPageHeaderTable page={oggPage} showHex={showHex} />
+          <h2>Ogg Packets</h2>
+          <OggPacketsList packets={packets} showHex={showHex} />
+          <h2>Segments</h2>
           {_.range(0, oggPage.numberOfPageSegments).map((segmentIndex) => (
             <SegmentInfo
               key={`segment-${segmentIndex}`}
@@ -60,9 +65,9 @@ interface SegmentInfoProps {
 
 const SegmentInfo = ({ number, size, hex }: SegmentInfoProps) => (
   <>
-    <h2>
+    <h3>
       Segment {number} ({size} bytes)
-    </h2>
+    </h3>
     {hex && <div className="raw-hex">{hex}</div>}
   </>
 )
