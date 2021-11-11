@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import { OggOpusCommentHeader } from '../audio/OggOpusCommentHeader'
-import { ByteTableRowSpec, CellInterpretationType, ByteTable } from './ByteTableRow'
+import { ByteTable } from './ByteTableRow'
+import { ByteTableRowSpec, CellInterpretationType } from './ByteTableRowSpec'
 
 export interface OggOpusCommentHeaderTableProps {
   header: OggOpusCommentHeader

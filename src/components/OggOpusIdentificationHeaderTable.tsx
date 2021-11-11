@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import { OggOpusIdentificationHeader } from '../audio/OggOpusIdentificationHeader'
-import { ByteTable, ByteTableRowSpec, CellInterpretationType } from './ByteTableRow'
+import { ByteTable } from './ByteTableRow'
+import { ByteTableRowSpec, CellInterpretationType } from './ByteTableRowSpec'
 
 export interface OggOpusIdentificationHeaderTableProps {
   header: OggOpusIdentificationHeader

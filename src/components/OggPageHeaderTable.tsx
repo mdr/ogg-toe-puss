@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import { OggPage } from '../audio/OggPage'
-import { ByteTableRowSpec, CellInterpretationType, ByteTableCellSpec, ByteTable } from './ByteTableRow'
+import { ByteTable } from './ByteTableRow'
+import { ByteTableRowSpec, CellInterpretationType, ByteTableCellSpec } from './ByteTableRowSpec'
 export interface OggPageTableProps {
   page: OggPage
   showHex: boolean
