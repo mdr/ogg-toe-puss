@@ -19,7 +19,6 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
             type: CellInterpretationType.MULTIPLE,
             labels: _.range(4).map((i) => header.magicSignature[i]),
           },
-          hex: _.range(4).map(header.getMagicSignatureHex),
         },
       ],
     },
@@ -32,7 +31,6 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
             type: CellInterpretationType.MULTIPLE,
             labels: _.range(4, 4 + 4).map((i) => header.magicSignature[i]),
           },
-          hex: _.range(4, 4 + 4).map(header.getMagicSignatureHex),
         },
       ],
     },
@@ -46,7 +44,6 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
             type: CellInterpretationType.SINGLE,
             label: header.version.toString(),
           },
-          hex: [header.versionHex],
         },
         {
           width: 1,
@@ -56,7 +53,6 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
             type: CellInterpretationType.SINGLE,
             label: header.channelCount.toString(),
           },
-          hex: [header.channelCountHex],
         },
         {
           width: 2,
@@ -66,7 +62,6 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
             type: CellInterpretationType.SINGLE,
             label: header.preSkip.toString(),
           },
-          hex: _.range(2).map(header.getPreSkipHex),
         },
       ],
     },
@@ -80,7 +75,6 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
             type: CellInterpretationType.SINGLE,
             label: header.inputSampleRate.toString(),
           },
-          hex: _.range(4).map(header.getInputSampleRateHex),
         },
       ],
     },
@@ -94,7 +88,6 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
             type: CellInterpretationType.SINGLE,
             label: header.outputGain.toString(),
           },
-          hex: _.range(2).map(header.getOutputGainHex),
         },
         {
           width: 1,
@@ -104,12 +97,11 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
             type: CellInterpretationType.SINGLE,
             label: header.channelMappingFamily.toString(),
           },
-          hex: [header.channelMappingFamilyHex],
         },
       ],
     },
   ]
   return (
-    <ByteTable showHex={showHex} rows={rowSpecs} />
+    <ByteTable dataWindow={header.dataWindow} showHex={showHex} rows={rowSpecs} />
   )
 }

@@ -1,7 +1,8 @@
 import { OggPage } from '../audio/OggPage'
-import { Bytes } from '../util/types'
 import classNames from 'classnames'
 import _ from 'lodash'
+import { DataWindow } from '../util/DataWindow'
+import { asHexPair } from '../util/hexUtils'
 export interface OggPageTableProps {
   page: OggPage
   showHex: boolean
@@ -15,27 +16,36 @@ export enum CellInterpretationType {
 export interface ByteTableProps {
   showHex: boolean
   rows: ByteTableRowSpec[]
+  dataWindow: DataWindow
 }
 
-export const ByteTable = ({ showHex, rows }: ByteTableProps) => (
+export const ByteTable = ({ dataWindow, showHex, rows }: ByteTableProps) => (
   <table className="byte-table">
     <tbody>
-      {rows.map((row, i) => (
-        <ByteTableRow key={`byte-table-row-${i}`} showHex={showHex} rowSpec={row} startByte={i * 4} />
-      ))}
+      {rows.map((row, i) => {
+        const startByte = i * 4
+        const endByte = startByte + _.sumBy(row.cells, cell => cell.width) - 1
+        const hex = _.range(startByte, endByte + 1).map(byte => asHexPair(dataWindow.getByte(byte)))
+        return (
+          <ByteTableRow key={`byte-table-row-${i}`} showHex={showHex} rowSpec={row} startByte={startByte} endByte={endByte} hex={hex} />
+        )
+      })}
     </tbody>
   </table>
 )
 
 export interface ByteTableRowProps {
   startByte: number
+  endByte: number
   showHex: boolean
   rowSpec: ByteTableRowSpec
+  hex: string[]
 }
 
-export const ByteTableRow = ({ startByte, showHex, rowSpec }: ByteTableRowProps) => {
+export const ByteTableRow = ({ startByte, endByte, showHex, rowSpec, hex }: ByteTableRowProps) => {
   const { cells } = rowSpec
-  const endByte = startByte + _.sumBy(cells, cell => cell.width) - 1
+  const getHex =  (i: number, j: number): string => 
+    hex[_.sumBy(_.take(cells, i), cell => cell.width) + j]
   return (
     <>
       <tr>
@@ -55,14 +65,14 @@ export const ByteTableRow = ({ startByte, showHex, rowSpec }: ByteTableRowProps)
       {showHex && (
         <tr>
           {cells.map((cell, i) =>
-            cell.hex.map((hex, j) => (
+            _.range(cell.width).map(j => (
               <td
                 key={`byte-table-hex-row-${i}-${j}`}
                 className={classNames('byte-table__hex-cell', `byte-table__cell-style-${cell.colour}`, {
-                  'byte-table__border-right': j === cell.hex.length - 1,
+                  'byte-table__border-right': j === cell.width - 1,
                 })}
               >
-                {hex}
+                {getHex(i, j)}
               </td>
             ))
           )}
@@ -75,7 +85,7 @@ export const ByteTableRow = ({ startByte, showHex, rowSpec }: ByteTableRowProps)
               <td
                 key={`byte-table-interpretation-${i}-${j}`}
                 className={classNames('byte-table__interpretation-cell', `byte-table__cell-style-${cell.colour}`, {
-                  'byte-table__border-right': j === cell.hex.length - 1,
+                  'byte-table__border-right': j === cell.width - 1,
                 })}
               >
                 {label}
@@ -116,6 +126,5 @@ export interface ByteTableCellSpec {
   width: number
   header?: string
   interpretation?: CellInterpretation
-  hex: string[]
   colour: number
 }

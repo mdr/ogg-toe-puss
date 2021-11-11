@@ -60,11 +60,11 @@ export const BitstreamsTab = ({ streams }: BitstreamsTabProps) => {
                   RFC 7845 - 5.1. Identification Header
                 </a>
               </p>
-
               <OggOpusIdentificationHeaderTable
                 header={new OggOpusIdentificationHeader(new DataWindow(packet))}
                 showHex={showHex}
               />
+              <p/>
             </>
           )}
           {isOggOpusCommentHeader(packet, i) && (
@@ -76,6 +76,7 @@ export const BitstreamsTab = ({ streams }: BitstreamsTabProps) => {
                 </a>
               </p>
               <OggOpusCommentHeaderTable header={new OggOpusCommentHeader(new DataWindow(packet))} showHex={showHex} />
+              <p/>
             </>
           )}
           {showHex && (

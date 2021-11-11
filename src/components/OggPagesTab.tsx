@@ -7,6 +7,7 @@ import _ from 'lodash'
 import { useShowHex } from './showHexHook'
 import { Option } from '../util/util'
 import { Bytes } from '../util/types'
+import { asHexString } from '../util/hexUtils'
 export interface OggPagesTabProps {
   readonly oggPages: OggPage[]
 }
@@ -42,7 +43,7 @@ export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
               key={`segment-${segmentIndex}`}
               number={segmentIndex + 1}
               size={oggPage.getSegmentSize(segmentIndex)}
-              hex={showHex ? oggPage.getSegmentHex(segmentIndex) : undefined}
+              hex={showHex ? asHexString(oggPage.getSegment(segmentIndex), true) : undefined}
             />
           ))}
         </>

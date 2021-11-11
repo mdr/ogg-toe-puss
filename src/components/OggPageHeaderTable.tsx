@@ -26,7 +26,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
             type: CellInterpretationType.MULTIPLE,
             labels: _.range(4).map((i) => page.capturePattern[i]),
           },
-          hex: _.range(4).map(page.getCapturePatternHex),
         },
       ],
     },
@@ -40,7 +39,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
             type: CellInterpretationType.SINGLE,
             label: page.version.toString(),
           },
-          hex: [page.versionHex],
         },
         {
           width: 1,
@@ -50,12 +48,10 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
             type: CellInterpretationType.SINGLE,
             label: describeHeaderType(page),
           },
-          hex: [page.headerTypeHex],
         },
         {
           width: 2,
           colour: 4,
-          hex: _.range(2).map(page.getGranulePositionHex),
         },
       ],
     },
@@ -69,7 +65,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
             type: CellInterpretationType.SINGLE,
             label: page.granulePosition.toString(),
           },
-          hex: _.range(2, 2 + 4).map(page.getGranulePositionHex),
         },
       ],
     },
@@ -78,7 +73,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         {
           width: 2,
           colour: 4,
-          hex: _.range(6, 6 + 2).map(page.getGranulePositionHex),
         },
         {
           width: 2,
@@ -88,7 +82,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
             type: CellInterpretationType.SINGLE,
             label: page.bitstreamSerialNumber,
           },
-          hex: _.range(2).map(page.getBitstreamSerialNumberHex),
         },
       ],
     },
@@ -97,7 +90,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         {
           width: 2,
           colour: 5,
-          hex: _.range(2, 2 + 2).map(page.getBitstreamSerialNumberHex),
         },
         {
           width: 2,
@@ -107,7 +99,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
             type: CellInterpretationType.SINGLE,
             label: page.pageSequenceNumber.toString(),
           },
-          hex: _.range(2).map(page.getPageSequenceNumberHex),
         },
       ],
     },
@@ -116,7 +107,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         {
           width: 2,
           colour: 6,
-          hex: _.range(2, 2 + 2).map(page.getPageSequenceNumberHex),
         },
         {
           width: 2,
@@ -126,7 +116,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
             type: CellInterpretationType.SINGLE,
             label: page.crcChecksum,
           },
-          hex: _.range(2).map(page.getCrcChecksumHex),
         },
       ],
     },
@@ -135,7 +124,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         {
           width: 2,
           colour: 7,
-          hex: _.range(2, 2 + 2).map(page.getCrcChecksumHex),
         },
         {
           width: 1,
@@ -145,7 +133,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
             type: CellInterpretationType.SINGLE,
             label: page.numberOfPageSegments.toString(),
           },
-          hex: [page.numberOfPageSegmentsHex],
         },
         ...(page.numberOfPageSegments === 0
           ? []
@@ -158,7 +145,6 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
                   type: CellInterpretationType.SINGLE,
                   label: page.getSegmentSize(0).toString(),
                 },
-                hex: [page.getSegmentSizeHex(0)],
               } as ByteTableCellSpec,
             ]),
       ],
@@ -166,13 +152,10 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
     ..._.chunk(_.range(1, page.numberOfPageSegments), 4).map(
       (segmentIndices) =>
         ({
-          startByte: 27 + segmentIndices[0],
-          endByte: 27 + segmentIndices[segmentIndices.length - 1],
           cells: segmentIndices.map((segmentIndex) => ({
             width: 1,
             colour: 9,
             header: `Segment ${segmentIndex + 1} size`,
-            hex: [page.getSegmentSizeHex(segmentIndex)],
             interpretation: {
               type: CellInterpretationType.SINGLE,
               label: page.getSegmentSize(segmentIndex).toString(),
@@ -181,5 +164,5 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
         } as ByteTableRowSpec)
     ),
   ]
-  return <ByteTable showHex={showHex} rows={rowSpecs} />
+  return <ByteTable dataWindow={page.dataWindow} showHex={showHex} rows={rowSpecs} />
 }

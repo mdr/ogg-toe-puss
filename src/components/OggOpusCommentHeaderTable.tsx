@@ -19,7 +19,6 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
             type: CellInterpretationType.MULTIPLE,
             labels: _.range(4).map((i) => header.magicSignature[i]),
           },
-          hex: _.range(4).map(header.getMagicSignatureHex),
         },
       ],
     },
@@ -32,7 +31,6 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
             type: CellInterpretationType.MULTIPLE,
             labels: _.range(4, 4 + 4).map((i) => header.magicSignature[i]),
           },
-          hex: _.range(4, 4 + 4).map(header.getMagicSignatureHex),
         },
       ],
     },
@@ -46,7 +44,6 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
             type: CellInterpretationType.SINGLE,
             label: header.vendorStringLength.toString(),
           },
-          hex: _.range(4).map(header.getVendorStringLengthHex),
         },
       ],
     },
@@ -65,11 +62,10 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
                       label: header.vendorString,
                     }
                   : undefined,
-              hex: _.range(i * 4, i * 4 + 4).map(header.getVendorStringHex),
             },
           ],
         } as ByteTableRowSpec)
     ),
   ]
-  return <ByteTable showHex={showHex} rows={rowSpecs} />
+  return <ByteTable dataWindow={header.dataWindow} showHex={showHex} rows={rowSpecs} />
 }
