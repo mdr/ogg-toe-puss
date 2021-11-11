@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { OggOpusIdentificationHeader } from '../audio/OggOpusIdentificationHeader'
 import { ByteTable } from './ByteTableRow'
-import { ByteTableRowSpec, CellInterpretationType } from './ByteTableRowSpec'
+import { ByteTableRowSpec, multipleCellInterpretation, singleCellInterpretation } from './ByteTableRowSpec'
 
 export interface OggOpusIdentificationHeaderTableProps {
   header: OggOpusIdentificationHeader
@@ -16,10 +16,7 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
           width: 4,
           colour: 1,
           header: 'Magic Signature',
-          interpretation: {
-            type: CellInterpretationType.MULTIPLE,
-            labels: _.range(4).map((i) => header.magicSignature[i]),
-          },
+          interpretation: multipleCellInterpretation(_.range(4).map((i) => header.magicSignature[i])),
         },
       ],
     },
@@ -28,10 +25,7 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
         {
           width: 4,
           colour: 1,
-          interpretation: {
-            type: CellInterpretationType.MULTIPLE,
-            labels: _.range(4, 4 + 4).map((i) => header.magicSignature[i]),
-          },
+          interpretation: multipleCellInterpretation(_.range(4, 4 + 4).map((i) => header.magicSignature[i])),
         },
       ],
     },
@@ -41,28 +35,19 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
           width: 1,
           colour: 2,
           header: 'Version',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: header.version.toString(),
-          },
+          interpretation: singleCellInterpretation(header.version.toString()),
         },
         {
           width: 1,
           colour: 3,
           header: 'Channel Count',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: header.channelCount.toString(),
-          },
+          interpretation: singleCellInterpretation(header.channelCount.toString()),
         },
         {
           width: 2,
           colour: 4,
           header: 'Pre-skip',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: header.preSkip.toString(),
-          },
+          interpretation: singleCellInterpretation(header.preSkip.toString()),
         },
       ],
     },
@@ -72,10 +57,7 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
           width: 4,
           colour: 5,
           header: 'Input Sample Rate',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: header.inputSampleRate.toString(),
-          },
+          interpretation: singleCellInterpretation(header.inputSampleRate.toString()),
         },
       ],
     },
@@ -85,19 +67,13 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
           width: 2,
           colour: 6,
           header: 'Output Gain',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: header.outputGain.toString(),
-          },
+          interpretation: singleCellInterpretation(header.outputGain.toString()),
         },
         {
           width: 1,
           colour: 7,
           header: 'Mapping Family',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: header.channelMappingFamily.toString(),
-          },
+          interpretation: singleCellInterpretation(header.channelMappingFamily.toString()),
         },
       ],
     },

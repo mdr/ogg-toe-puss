@@ -1,7 +1,12 @@
 import _ from 'lodash'
 import { OggPage } from '../audio/OggPage'
 import { ByteTable } from './ByteTableRow'
-import { ByteTableRowSpec, CellInterpretationType, ByteTableCellSpec } from './ByteTableRowSpec'
+import {
+  ByteTableRowSpec,
+  ByteTableCellSpec,
+  multipleCellInterpretation,
+  singleCellInterpretation,
+} from './ByteTableRowSpec'
 export interface OggPageTableProps {
   page: OggPage
   showHex: boolean
@@ -23,10 +28,7 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
           width: 4,
           colour: 1,
           header: 'Capture Pattern',
-          interpretation: {
-            type: CellInterpretationType.MULTIPLE,
-            labels: _.range(4).map((i) => page.capturePattern[i]),
-          },
+          interpretation: multipleCellInterpretation(_.range(4).map((i) => page.capturePattern[i])),
         },
       ],
     },
@@ -36,19 +38,13 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
           width: 1,
           colour: 2,
           header: 'Version',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: page.version.toString(),
-          },
+          interpretation: singleCellInterpretation(page.version.toString()),
         },
         {
           width: 1,
           colour: 3,
           header: 'Header Type',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: describeHeaderType(page),
-          },
+          interpretation: singleCellInterpretation(describeHeaderType(page)),
         },
         {
           width: 2,
@@ -62,10 +58,7 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
           width: 4,
           colour: 4,
           header: 'Granule Position',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: page.granulePosition.toString(),
-          },
+          interpretation: singleCellInterpretation(page.granulePosition.toString()),
         },
       ],
     },
@@ -79,10 +72,7 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
           width: 2,
           colour: 5,
           header: 'Bitstream Serial Number',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: page.bitstreamSerialNumber,
-          },
+          interpretation: singleCellInterpretation(page.bitstreamSerialNumber),
         },
       ],
     },
@@ -96,10 +86,7 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
           width: 2,
           colour: 6,
           header: 'Page Sequence Number',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: page.pageSequenceNumber.toString(),
-          },
+          interpretation: singleCellInterpretation(page.pageSequenceNumber.toString()),
         },
       ],
     },
@@ -113,10 +100,7 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
           width: 2,
           colour: 7,
           header: 'CRC Checksum',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: page.crcChecksum,
-          },
+          interpretation: singleCellInterpretation(page.crcChecksum),
         },
       ],
     },
@@ -130,10 +114,7 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
           width: 1,
           colour: 8,
           header: 'Page Segments',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: page.numberOfPageSegments.toString(),
-          },
+          interpretation: singleCellInterpretation(page.numberOfPageSegments.toString()),
         },
         ...(page.numberOfPageSegments === 0
           ? []
@@ -142,10 +123,7 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
                 width: 1,
                 colour: 9,
                 header: 'Segment 1 Size',
-                interpretation: {
-                  type: CellInterpretationType.SINGLE,
-                  label: page.getSegmentSize(0).toString(),
-                },
+                interpretation: singleCellInterpretation(page.getSegmentSize(0).toString()),
               } as ByteTableCellSpec,
             ]),
       ],
@@ -157,10 +135,7 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
             width: 1,
             colour: 9,
             header: `Segment ${segmentIndex + 1} size`,
-            interpretation: {
-              type: CellInterpretationType.SINGLE,
-              label: page.getSegmentSize(segmentIndex).toString(),
-            },
+            interpretation: singleCellInterpretation(page.getSegmentSize(segmentIndex).toString()),
           })),
         } as ByteTableRowSpec)
     ),

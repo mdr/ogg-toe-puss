@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { OggOpusCommentHeader } from '../audio/OggOpusCommentHeader'
 import { ByteTable } from './ByteTableRow'
-import { ByteTableRowSpec, CellInterpretationType } from './ByteTableRowSpec'
+import { ByteTableRowSpec, multipleCellInterpretation, singleCellInterpretation } from './ByteTableRowSpec'
 
 export interface OggOpusCommentHeaderTableProps {
   header: OggOpusCommentHeader
@@ -16,10 +16,7 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
           width: 4,
           colour: 1,
           header: 'Magic Signature',
-          interpretation: {
-            type: CellInterpretationType.MULTIPLE,
-            labels: _.range(4).map((i) => header.magicSignature[i]),
-          },
+          interpretation: multipleCellInterpretation(_.range(4).map((i) => header.magicSignature[i])),
         },
       ],
     },
@@ -28,10 +25,7 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
         {
           width: 4,
           colour: 1,
-          interpretation: {
-            type: CellInterpretationType.MULTIPLE,
-            labels: _.range(4, 4 + 4).map((i) => header.magicSignature[i]),
-          },
+          interpretation: multipleCellInterpretation(_.range(4, 4 + 4).map((i) => header.magicSignature[i])),
         },
       ],
     },
@@ -41,10 +35,7 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
           width: 4,
           colour: 2,
           header: 'Vendor String Length',
-          interpretation: {
-            type: CellInterpretationType.SINGLE,
-            label: header.vendorStringLength.toString(),
-          },
+          interpretation: singleCellInterpretation(header.vendorStringLength.toString()),
         },
       ],
     },
@@ -56,13 +47,7 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
               width: piece.length,
               colour: 5,
               header: i === 0 ? 'Vendor String' : undefined,
-              interpretation:
-                i === 0
-                  ? {
-                      type: CellInterpretationType.SINGLE,
-                      label: header.vendorString,
-                    }
-                  : undefined,
+              interpretation: i === 0 ? singleCellInterpretation(header.vendorString) : undefined,
             },
           ],
         } as ByteTableRowSpec)
