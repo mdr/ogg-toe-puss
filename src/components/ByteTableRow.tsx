@@ -1,25 +1,22 @@
-import { OggPage } from '../audio/OggPage'
 import classNames from 'classnames'
 import _ from 'lodash'
 import { DataWindow } from '../util/DataWindow'
 import { asHexPair } from '../util/hexUtils'
+import { Bytes } from '../util/types'
 import { ByteTableRowSpec, CellInterpretationType } from './ByteTableRowSpec'
-export interface OggPageTableProps {
-  page: OggPage
-  showHex: boolean
-}
-
 export interface ByteTableProps {
   showHex: boolean
   rows: ByteTableRowSpec[]
   dataWindow: DataWindow
 }
 
+const TableWidth: Bytes = 4
+
 export const ByteTable = ({ dataWindow, showHex, rows }: ByteTableProps) => (
   <table className="byte-table">
     <tbody>
       {rows.map((row, i) => {
-        const startByte = i * 4
+        const startByte = i * TableWidth
         const endByte = startByte + _.sumBy(row.cells, cell => cell.width) - 1
         const hex = _.range(startByte, endByte + 1).map(byte => asHexPair(dataWindow.getByte(byte)))
         return (
