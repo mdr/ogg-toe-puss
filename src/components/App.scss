@@ -43,10 +43,6 @@ button {
     
 }
 
-// .id-header-table, .comment-header-table {
-//   margin-bottom: 10px;
-// }
-
 $byte-table-internal-border: 1px solid black;
 
 .byte-table {
@@ -88,10 +84,6 @@ $byte-table-internal-border: 1px solid black;
 
 .byte-table__cell-style-1 {
   background-color: rgb(255, 218, 218);
-}
-
-.byte-table__cell-style-1.byte-table__interpretation-cell {
-  font-family: $fixed-width-font;
 }
 
 .byte-table__cell-style-2 {
