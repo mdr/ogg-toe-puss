@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { OggOpusCommentHeader } from '../audio/OggOpusCommentHeader'
 import { ByteTable } from './ByteTableRow'
 import { ByteTableRowSpec, multipleCellInterpretation, singleCellInterpretation } from './ByteTableRowSpec'
+import { arrangeCellsIntoRows } from './cellArranger'
 
 export interface OggOpusCommentHeaderTableProps {
   header: OggOpusCommentHeader
@@ -29,32 +30,30 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
         },
       ],
     },
-    {
-      cells: [
+    ...arrangeCellsIntoRows(
+      [
         {
           width: 4,
           colour: 2,
           header: 'Vendor String Length',
           interpretation: singleCellInterpretation(header.vendorStringLength.toString()),
         },
+        {
+          width: header.vendorString.length,
+          colour: 3,
+          header: 'Vendor String',
+          interpretation: singleCellInterpretation(header.vendorString),
+        },
+        {
+          width: 4,
+          colour: 4,
+          header: 'User Comment List Length',
+          interpretation: singleCellInterpretation(header.userCommentListLength.toString()),
+        },
       ],
-    },
-    ...getVendorStringRows(header),
+      4
+    ),
   ]
+
   return <ByteTable dataWindow={header.dataWindow} showHex={showHex} rows={rowSpecs} />
 }
-
-const getVendorStringRows = (header: OggOpusCommentHeader): ByteTableRowSpec[] => 
-  _.chunk(header.vendorString, 4).map(
-    (piece, i) =>
-      ({
-        cells: [
-          {
-            width: piece.length,
-            colour: 5,
-            header: i === 0 ? 'Vendor String' : undefined,
-            interpretation: i === 0 ? singleCellInterpretation(header.vendorString) : undefined,
-          },
-        ],
-      })
-  )

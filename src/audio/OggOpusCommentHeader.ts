@@ -22,4 +22,7 @@ export class OggOpusCommentHeader {
     return new TextDecoder().decode(this.dataWindow.getArrayBufferSlice(12, this.vendorStringLength))
   }
 
+  get userCommentListLength(): number {
+    return this.dataWindow.getUint32(12 + this.vendorStringLength)
+  }
 }
