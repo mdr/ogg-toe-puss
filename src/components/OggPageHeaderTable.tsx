@@ -128,17 +128,20 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
             ]),
       ],
     },
-    ..._.chunk(_.range(1, page.numberOfPageSegments), 4).map(
-      (segmentIndices) =>
-        ({
-          cells: segmentIndices.map((segmentIndex) => ({
-            width: 1,
-            colour: 9,
-            header: `Segment ${segmentIndex + 1} size`,
-            interpretation: singleCellInterpretation(page.getSegmentSize(segmentIndex).toString()),
-          })),
-        } as ByteTableRowSpec)
-    ),
+    ...getPageSegmentLengthRows(page),
   ]
   return <ByteTable dataWindow={page.dataWindow} showHex={showHex} rows={rowSpecs} />
 }
+
+const getPageSegmentLengthRows = (page: OggPage): ByteTableRowSpec[] =>
+  _.chunk(_.range(1, page.numberOfPageSegments), 4).map(
+    (segmentIndices) =>
+      ({
+        cells: segmentIndices.map((segmentIndex) => ({
+          width: 1,
+          colour: 9,
+          header: `Segment ${segmentIndex + 1} size`,
+          interpretation: singleCellInterpretation(page.getSegmentSize(segmentIndex).toString()),
+        })),
+      })
+  )

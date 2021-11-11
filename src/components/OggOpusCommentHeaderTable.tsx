@@ -39,19 +39,22 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
         },
       ],
     },
-    ..._.chunk(header.vendorString, 4).map(
-      (piece, i) =>
-        ({
-          cells: [
-            {
-              width: piece.length,
-              colour: 5,
-              header: i === 0 ? 'Vendor String' : undefined,
-              interpretation: i === 0 ? singleCellInterpretation(header.vendorString) : undefined,
-            },
-          ],
-        } as ByteTableRowSpec)
-    ),
+    ...getVendorStringRows(header),
   ]
   return <ByteTable dataWindow={header.dataWindow} showHex={showHex} rows={rowSpecs} />
 }
+
+const getVendorStringRows = (header: OggOpusCommentHeader): ByteTableRowSpec[] => 
+  _.chunk(header.vendorString, 4).map(
+    (piece, i) =>
+      ({
+        cells: [
+          {
+            width: piece.length,
+            colour: 5,
+            header: i === 0 ? 'Vendor String' : undefined,
+            interpretation: i === 0 ? singleCellInterpretation(header.vendorString) : undefined,
+          },
+        ],
+      })
+  )
