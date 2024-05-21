@@ -1,7 +1,6 @@
 import React from 'react'
 
 import './App.scss'
-import _ from 'lodash'
 import { asHexString } from '../util/hexUtils'
 import { isOggOpusCommentHeader, OggOpusCommentHeader } from '../audio/OggOpusCommentHeader'
 import { isOggOpusIdentificationHeader, OggOpusIdentificationHeader } from '../audio/OggOpusIdentificationHeader'
