@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/ogg-toe-puss/static/css/main.40e4dbe9.chunk.css",
-    "main.js": "/ogg-toe-puss/static/js/main.0df4bad3.chunk.js",
-    "main.js.map": "/ogg-toe-puss/static/js/main.0df4bad3.chunk.js.map",
+    "main.css": "/ogg-toe-puss/static/css/main.1d7382e3.chunk.css",
+    "main.js": "/ogg-toe-puss/static/js/main.b415ce64.chunk.js",
+    "main.js.map": "/ogg-toe-puss/static/js/main.b415ce64.chunk.js.map",
     "runtime-main.js": "/ogg-toe-puss/static/js/runtime-main.ae095832.js",
     "runtime-main.js.map": "/ogg-toe-puss/static/js/runtime-main.ae095832.js.map",
     "static/js/2.10beaf53.chunk.js": "/ogg-toe-puss/static/js/2.10beaf53.chunk.js",
     "static/js/2.10beaf53.chunk.js.map": "/ogg-toe-puss/static/js/2.10beaf53.chunk.js.map",
     "index.html": "/ogg-toe-puss/index.html",
-    "static/css/main.40e4dbe9.chunk.css.map": "/ogg-toe-puss/static/css/main.40e4dbe9.chunk.css.map",
+    "static/css/main.1d7382e3.chunk.css.map": "/ogg-toe-puss/static/css/main.1d7382e3.chunk.css.map",
     "static/js/2.10beaf53.chunk.js.LICENSE.txt": "/ogg-toe-puss/static/js/2.10beaf53.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ae095832.js",
     "static/js/2.10beaf53.chunk.js",
-    "static/css/main.40e4dbe9.chunk.css",
-    "static/js/main.0df4bad3.chunk.js"
+    "static/css/main.1d7382e3.chunk.css",
+    "static/js/main.b415ce64.chunk.js"
   ]
 }
