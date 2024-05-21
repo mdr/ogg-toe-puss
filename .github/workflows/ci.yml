@@ -25,11 +25,11 @@ jobs:
       - name: Install dependencies 📥
         run: yarn install
 
-#      - name: Lint 🧹
-#        run: yarn lint
-#
-#      - name: Run tests 🧪
-#        run: yarn test
+      #      - name: Lint 🧹
+      #        run: yarn lint
+      #
+      #      - name: Run tests 🧪
+      #        run: yarn test
 
       - name: Build 🏗️
         run: yarn build
@@ -38,7 +38,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist
+          folder: build
 
 #  dependabot:
 #    name: 'Dependabot'
