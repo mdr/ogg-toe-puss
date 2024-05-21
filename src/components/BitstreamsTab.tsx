@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import './App.scss'
 import { LogicalBitstream } from '../audio/packetExtractor'
-import { useShowHex } from './showHexHook'
+import { useShowHexService } from './useShowHexService'
 import { BitstreamSerialNumber } from '../audio/OggPage'
 import { detectStreamType } from '../audio/oggParser'
 import _ from 'lodash'
@@ -13,7 +13,7 @@ export interface BitstreamsTabProps {
 }
 
 export const BitstreamsTab = ({ streams }: BitstreamsTabProps) => {
-  const { showHex } = useShowHex()
+  const { showHex } = useShowHexService()
   const [selectedStreamSerialNumber, setSelectedStreamSerialNumber] = useState<BitstreamSerialNumber>(
     streams[0].serialNumber
   )

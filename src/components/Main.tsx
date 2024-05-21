@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { OggPage } from '../audio/OggPage'
 import { extractBitstreams, LogicalBitstream } from '../audio/packetExtractor'
-import { useShowHex } from './showHexHook'
+import { useShowHexService } from './useShowHexService'
 import { parseOggPages } from '../audio/oggParser'
 import { Dropzone } from './Dropzone'
 import { OggPagesTab } from './OggPagesTab'
@@ -19,7 +19,7 @@ export const Main = () => {
   const [oggPages, setOggPages] = useState<OggPage[]>()
   const [bitstreams, setBitstreams] = useState<LogicalBitstream[]>([])
   const [tab, setTab] = useState<AppTab>(AppTab.OGG_PAGES)
-  const { showHex, setShowHex } = useShowHex()
+  const { showHex, setShowHex } = useShowHexService()
   const importFile = (arrayBuffer: ArrayBuffer) => {
     const oggPages = parseOggPages(arrayBuffer)
     const bitstreams = extractBitstreams(oggPages)

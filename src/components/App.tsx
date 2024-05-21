@@ -1,12 +1,12 @@
 import React from 'react'
 
 import './App.scss'
-import { ShowHexProvider } from './showHexHook'
+import { ShowHexServiceProvider } from './useShowHexService'
 import { Main } from './Main'
 
 export const App = () => (
-  <ShowHexProvider>
+  <ShowHexServiceProvider>
     <Main />
-  </ShowHexProvider>
+  </ShowHexServiceProvider>
 )
 

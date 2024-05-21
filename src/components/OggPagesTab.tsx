@@ -4,18 +4,19 @@ import './App.scss'
 import { OggPage } from '../audio/OggPage'
 import { OggPageHeaderTable } from './OggPageHeaderTable'
 import _ from 'lodash'
-import { useShowHex } from './showHexHook'
+import { useShowHexService } from './useShowHexService'
 import { Option } from '../util/util'
 import { Bytes } from '../util/types'
 import { asHexString } from '../util/hexUtils'
 import { extractPacketsEntirelyContainedWithinPage } from '../audio/packetExtractor'
 import { OggPacketsList } from './OggPacketsList'
+
 export interface OggPagesTabProps {
   readonly oggPages: OggPage[]
 }
 
 export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
-  const { showHex } = useShowHex()
+  const { showHex } = useShowHexService()
   const [pageNumber, setPageNumber] = useState<number>(0)
   useEffect(() => setPageNumber(0), [oggPages])
   const oggPage = pageNumber < oggPages.length ? oggPages[pageNumber] : undefined
