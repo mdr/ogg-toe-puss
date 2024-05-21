@@ -44,7 +44,8 @@ export const extractBitstreams = (pages: OggPage[]): LogicalBitstream[] => {
 }
 
 const concatenateArrayBuffers = (buffers: ArrayBuffer[]): ArrayBuffer => {
-  const array = new Uint8Array(_.sumBy(buffers, (buffer) => buffer.byteLength))
+  const totalBytes = _.sumBy(buffers, (buffer) => buffer.byteLength)
+  const array = new Uint8Array(totalBytes)
   let offset = 0
   for (const buffer of buffers) {
     array.set(new Uint8Array(buffer), offset)
@@ -56,7 +57,7 @@ const concatenateArrayBuffers = (buffers: ArrayBuffer[]): ArrayBuffer => {
 export const extractPacketsEntirelyContainedWithinPage = (page: OggPage): ArrayBuffer[] => {
   const packets: ArrayBuffer[] = []
   const segmentsSoFar: ArrayBuffer[] = []
-  var isFirstPacket = true
+  let isFirstPacket = true
   for (const segment of page.segments) {
     segmentsSoFar.push(segment)
     const segmentCompletesPacket = segment.byteLength < 255
