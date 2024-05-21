@@ -63,7 +63,8 @@ export const extractPacketsEntirelyContainedWithinPage = (page: OggPage): ArrayB
     const segmentCompletesPacket = segment.byteLength < 255
     if (segmentCompletesPacket) {
       const packet = concatenateArrayBuffers(segmentsSoFar)
-      if (!(page.containsContinuedPacket && isFirstPacket)) { // skip continuation packet
+      if (!(page.containsContinuedPacket && isFirstPacket)) {
+        // skip continuation packet
         packets.push(packet)
       }
       segmentsSoFar.length = 0

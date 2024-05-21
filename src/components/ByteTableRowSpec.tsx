@@ -15,14 +15,14 @@ export interface MultipleCellInterpretation {
 
 export type CellInterpretation = SingleCellInterpretation | MultipleCellInterpretation
 
-export const singleCellInterpretation = (label: string): SingleCellInterpretation => ( {
+export const singleCellInterpretation = (label: string): SingleCellInterpretation => ({
   type: CellInterpretationType.SINGLE,
-  label
+  label,
 })
 
-export const multipleCellInterpretation = (labels: string[]): MultipleCellInterpretation => ( {
+export const multipleCellInterpretation = (labels: string[]): MultipleCellInterpretation => ({
   type: CellInterpretationType.MULTIPLE,
-  labels
+  labels,
 })
 
 export interface ByteTableRowSpec {
@@ -35,4 +35,3 @@ export interface ByteTableCellSpec {
   interpretation?: CellInterpretation
   colour: number
 }
-

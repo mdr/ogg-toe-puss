@@ -78,7 +78,5 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
       ],
     },
   ]
-  return (
-    <ByteTable dataWindow={header.dataWindow} showHex={showHex} rows={rowSpecs} />
-  )
+  return <ByteTable dataWindow={header.dataWindow} showHex={showHex} rows={rowSpecs} />
 }

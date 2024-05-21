@@ -5,16 +5,16 @@ import { Option } from '../util/util'
 import _ from 'lodash'
 
 export const parseOggPages = (arrayBuffer: ArrayBuffer): OggPage[] => {
-    let dataWindow = new DataWindow(arrayBuffer)
-    let page = new OggPage(dataWindow)
-    const pages = [page]
-    while (!page.isLastPage) {
-      dataWindow = dataWindow.slide(page.pageSize)
-      page = new OggPage(dataWindow)
-      pages.push(page)
-    }
-    return pages
+  let dataWindow = new DataWindow(arrayBuffer)
+  let page = new OggPage(dataWindow)
+  const pages = [page]
+  while (!page.isLastPage) {
+    dataWindow = dataWindow.slide(page.pageSize)
+    page = new OggPage(dataWindow)
+    pages.push(page)
   }
+  return pages
+}
 
 const CodecIdentifier = {
   Opus: [0x4f, 0x70, 0x75, 0x73, 0x48, 0x65, 0x61, 0x64], // 'OpusHead'
@@ -26,8 +26,7 @@ const CodecIdentifier = {
 const takeBytes = (packet: ArrayBuffer, n: number): number[] =>
   Array.from(new Uint8Array(packet.slice(0, Math.min(n, packet.byteLength))))
 
-const startsWith = (packet: ArrayBuffer, bytes: number[]): boolean =>
-  _.isEqual(takeBytes(packet, bytes.length), bytes)
+const startsWith = (packet: ArrayBuffer, bytes: number[]): boolean => _.isEqual(takeBytes(packet, bytes.length), bytes)
 
 export const detectStreamType = (stream: LogicalBitstream): Option<string> => {
   if (stream.packets.length === 0) {

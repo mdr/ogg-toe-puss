@@ -17,10 +17,17 @@ export const ByteTable = ({ dataWindow, showHex, rows }: ByteTableProps) => (
     <tbody>
       {rows.map((row, i) => {
         const startByte = i * TableWidth
-        const endByte = startByte + _.sumBy(row.cells, cell => cell.width) - 1
-        const hex = _.range(startByte, endByte + 1).map(byte => asHexPair(dataWindow.getByte(byte)))
+        const endByte = startByte + _.sumBy(row.cells, (cell) => cell.width) - 1
+        const hex = _.range(startByte, endByte + 1).map((byte) => asHexPair(dataWindow.getByte(byte)))
         return (
-          <ByteTableRow key={`byte-table-row-${i}`} showHex={showHex} rowSpec={row} startByte={startByte} endByte={endByte} hex={hex} />
+          <ByteTableRow
+            key={`byte-table-row-${i}`}
+            showHex={showHex}
+            rowSpec={row}
+            startByte={startByte}
+            endByte={endByte}
+            hex={hex}
+          />
         )
       })}
     </tbody>
@@ -37,8 +44,7 @@ export interface ByteTableRowProps {
 
 export const ByteTableRow = ({ startByte, endByte, showHex, rowSpec, hex }: ByteTableRowProps) => {
   const { cells } = rowSpec
-  const getHex =  (i: number, j: number): string => 
-    hex[_.sumBy(_.take(cells, i), cell => cell.width) + j]
+  const getHex = (i: number, j: number): string => hex[_.sumBy(_.take(cells, i), (cell) => cell.width) + j]
   return (
     <>
       <tr>
@@ -58,7 +64,7 @@ export const ByteTableRow = ({ startByte, endByte, showHex, rowSpec, hex }: Byte
       {showHex && (
         <tr>
           {cells.map((cell, i) =>
-            _.range(cell.width).map(j => (
+            _.range(cell.width).map((j) => (
               <td
                 key={`byte-table-hex-row-${i}-${j}`}
                 className={classNames('byte-table__hex-cell', `byte-table__cell-style-${cell.colour}`, {

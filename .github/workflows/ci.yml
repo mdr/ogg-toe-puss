@@ -5,9 +5,9 @@ permissions:
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-test:
@@ -39,7 +39,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: build
-
 #  dependabot:
 #    name: 'Dependabot'
 #    runs-on: ubuntu-latest

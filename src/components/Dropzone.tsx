@@ -9,7 +9,7 @@ export const Dropzone = ({ onDrop }: DropzoneProps) => {
   const onDropAccepted = useCallback((acceptedFiles: File[]) => onDrop(acceptedFiles[0]), [onDrop])
   const { getRootProps, getInputProps } = useDropzone({
     onDropAccepted,
-    accept: ['audio/ogg', 'video/ogg', 'application/ogg', 'audio/opus']
+    accept: ['audio/ogg', 'video/ogg', 'application/ogg', 'audio/opus'],
   })
 
   return (

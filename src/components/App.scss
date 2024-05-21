@@ -33,14 +33,14 @@ button {
     outline-offset: -4px;
   }
 
-  &:hover,&:focus {
+  &:hover,
+  &:focus {
     background: #0053ba;
   }
-  
+
   &:active {
     transform: scale(0.99);
   }
-    
 }
 
 $byte-table-internal-border: 1px solid black;

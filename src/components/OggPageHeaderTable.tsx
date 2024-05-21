@@ -134,14 +134,11 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
 }
 
 const getPageSegmentLengthRows = (page: OggPage): ByteTableRowSpec[] =>
-  _.chunk(_.range(1, page.numberOfPageSegments), 4).map(
-    (segmentIndices) =>
-      ({
-        cells: segmentIndices.map((segmentIndex) => ({
-          width: 1,
-          colour: 9,
-          header: `Segment ${segmentIndex + 1} size`,
-          interpretation: singleCellInterpretation(page.getSegmentSize(segmentIndex).toString()),
-        })),
-      })
-  )
+  _.chunk(_.range(1, page.numberOfPageSegments), 4).map((segmentIndices) => ({
+    cells: segmentIndices.map((segmentIndex) => ({
+      width: 1,
+      colour: 9,
+      header: `Segment ${segmentIndex + 1} size`,
+      interpretation: singleCellInterpretation(page.getSegmentSize(segmentIndex).toString()),
+    })),
+  }))

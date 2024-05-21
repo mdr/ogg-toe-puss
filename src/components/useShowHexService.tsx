@@ -8,7 +8,7 @@ export interface ShowHexService {
 
 const ShowHexServiceContext = React.createContext<ShowHexService>({
   showHex: false,
-  setShowHex: () => undefined
+  setShowHex: () => undefined,
 })
 
 export const useShowHexService = (): ShowHexService => useContext(ShowHexServiceContext)
