@@ -11,16 +11,29 @@ import { OggOpusIdentificationHeaderTable } from './OggOpusIdentificationHeaderT
 export interface OggPacketsListProps {
   showHex: boolean
   packets: ArrayBuffer[]
+  isOpus: boolean
 }
 
 const isUnknownPacket = (packet: ArrayBuffer): boolean =>
   !isOggOpusIdentificationHeader(packet) && !isOggOpusCommentHeader(packet)
 
-export const OggPacketsList = ({ packets, showHex }: OggPacketsListProps) => (
+export const OggPacketsList = ({ packets, showHex, isOpus }: OggPacketsListProps) => (
   <>
     {packets.map((packet, i) => (
       <React.Fragment key={`packet-${i}`}>
-        {isUnknownPacket(packet) && (
+        {isUnknownPacket(packet) && isOpus && (
+          <>
+            <h3>
+              Packet {i + 1} ({packet.byteLength} bytes) - Opus Packet
+            </h3>
+            {showHex && (
+              <div className="raw-hex" key={`packet-hex-${i}`}>
+                {asHexString(packet, true)}
+              </div>
+            )}
+          </>
+        )}
+        {isUnknownPacket(packet) && !isOpus && (
           <>
             <h3>
               Packet {i + 1} ({packet.byteLength} bytes)

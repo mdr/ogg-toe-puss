@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import './App.scss'
-import { OggPage } from '../audio/OggPage'
+import { BitstreamSerialNumber, OggPage } from '../audio/OggPage'
 import { OggPageHeaderTable } from './OggPageHeaderTable'
 import _ from 'lodash'
 import { useShowHexService } from './useShowHexService'
@@ -13,9 +13,10 @@ import { OggPacketsList } from './OggPacketsList'
 
 export interface OggPagesTabProps {
   readonly oggPages: OggPage[]
+  readonly opusBitstreamSerialNumbers: BitstreamSerialNumber[]
 }
 
-export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
+export const OggPagesTab = ({ oggPages, opusBitstreamSerialNumbers }: OggPagesTabProps) => {
   const { showHex } = useShowHexService()
   const [pageNumber, setPageNumber] = useState<number>(0)
   const [previousOggPages, setPreviousOggPages] = useState<OggPage[]>(oggPages)
@@ -46,7 +47,11 @@ export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
           </p>
           <OggPageHeaderTable page={oggPage} showHex={showHex} />
           <h2>Ogg Packets</h2>
-          <OggPacketsList packets={packets} showHex={showHex} />
+          <OggPacketsList
+            packets={packets}
+            showHex={showHex}
+            isOpus={opusBitstreamSerialNumbers.includes(oggPage.bitstreamSerialNumber)}
+          />
           <h2>Segments</h2>
           {_.range(0, oggPage.numberOfPageSegments).map((segmentIndex) => (
             <SegmentInfo

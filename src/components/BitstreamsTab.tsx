@@ -10,9 +10,10 @@ import { LogicalBitstream } from '../audio/LogicalBitstream'
 
 export interface BitstreamsTabProps {
   streams: LogicalBitstream[]
+  opusBitstreamSerialNumbers: BitstreamSerialNumber[]
 }
 
-export const BitstreamsTab = ({ streams }: BitstreamsTabProps) => {
+export const BitstreamsTab = ({ streams, opusBitstreamSerialNumbers }: BitstreamsTabProps) => {
   const { showHex } = useShowHexService()
   const [previousStreams, setPreviousStreams] = useState<LogicalBitstream[]>(streams)
   const [selectedStreamSerialNumber, setSelectedStreamSerialNumber] = useState<BitstreamSerialNumber>(
@@ -48,7 +49,11 @@ export const BitstreamsTab = ({ streams }: BitstreamsTabProps) => {
         </div>
       ))}
       <h2>Ogg Packets</h2>
-      <OggPacketsList packets={stream.packets} showHex={showHex} />
+      <OggPacketsList
+        packets={stream.packets}
+        showHex={showHex}
+        isOpus={opusBitstreamSerialNumbers.includes(stream.serialNumber)}
+      />
     </div>
   )
 }
