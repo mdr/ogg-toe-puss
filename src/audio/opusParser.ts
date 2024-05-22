@@ -112,3 +112,32 @@ export const parseTocByte = (tocByte: number): OpusToc => {
 
   return { mode, bandwidth, frameMs, stereo, frameCount }
 }
+
+export enum BitRateType {
+  CBR = 'Constant Bit Rate',
+  VBR = 'Variable Bit Rate',
+}
+
+export enum Padding {
+  NO_PADDING = 'No Padding',
+  OPUS_PADDING = 'Opus Padding',
+}
+
+export interface OpusFrameCountByte {
+  vbr: BitRateType
+  padding: Padding
+  frameCount: number
+}
+
+export const parseOpusFrameCountByte = (frameCountByte: number): OpusFrameCountByte => {
+  // Extract the VBR bit (bit 7)
+  const vbr = frameCountByte & 0x80 ? BitRateType.VBR : BitRateType.CBR
+
+  // Extract the padding bit (bit 6)
+  const padding = frameCountByte & 0x40 ? Padding.OPUS_PADDING : Padding.NO_PADDING
+
+  // Extract the frame count (bits 0 to 5)
+  const frameCount = frameCountByte & 0x3f
+
+  return { vbr, padding, frameCount }
+}
