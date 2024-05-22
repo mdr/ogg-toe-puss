@@ -1,10 +1,6 @@
 import { BitstreamSerialNumber, OggPage } from './OggPage'
 import _ from 'lodash'
-
-export interface LogicalBitstream {
-  readonly serialNumber: BitstreamSerialNumber
-  readonly packets: ArrayBuffer[]
-}
+import { LogicalBitstream } from './LogicalBitstream'
 
 interface PacketInfo {
   packets: ArrayBuffer[]

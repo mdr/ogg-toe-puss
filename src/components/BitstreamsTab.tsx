@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import './App.scss'
-import { LogicalBitstream } from '../audio/packetExtractor'
 import { useShowHexService } from './useShowHexService'
 import { BitstreamSerialNumber } from '../audio/OggPage'
 import { detectStreamType } from '../audio/oggParser'
 import _ from 'lodash'
 import { OggPacketsList } from './OggPacketsList'
+import { LogicalBitstream } from '../audio/LogicalBitstream'
 
 export interface BitstreamsTabProps {
   streams: LogicalBitstream[]
@@ -14,10 +14,14 @@ export interface BitstreamsTabProps {
 
 export const BitstreamsTab = ({ streams }: BitstreamsTabProps) => {
   const { showHex } = useShowHexService()
+  const [previousStreams, setPreviousStreams] = useState<LogicalBitstream[]>(streams)
   const [selectedStreamSerialNumber, setSelectedStreamSerialNumber] = useState<BitstreamSerialNumber>(
     streams[0].serialNumber
   )
-  useEffect(() => setSelectedStreamSerialNumber(streams[0].serialNumber), [streams])
+  if (previousStreams !== streams) {
+    setPreviousStreams(streams)
+    setSelectedStreamSerialNumber(streams[0].serialNumber)
+  }
 
   const stream = streams.find((stream) => stream.serialNumber === selectedStreamSerialNumber)
   if (stream === undefined) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import './App.scss'
 import { OggPage } from '../audio/OggPage'
@@ -18,7 +18,11 @@ export interface OggPagesTabProps {
 export const OggPagesTab = ({ oggPages }: OggPagesTabProps) => {
   const { showHex } = useShowHexService()
   const [pageNumber, setPageNumber] = useState<number>(0)
-  useEffect(() => setPageNumber(0), [oggPages])
+  const [previousOggPages, setPreviousOggPages] = useState<OggPage[]>(oggPages)
+  if (previousOggPages !== oggPages) {
+    setPreviousOggPages(oggPages)
+    setPageNumber(0)
+  }
   const oggPage = pageNumber < oggPages.length ? oggPages[pageNumber] : undefined
   const packets = oggPage === undefined ? [] : extractPacketsEntirelyContainedWithinPage(oggPage)
   return (

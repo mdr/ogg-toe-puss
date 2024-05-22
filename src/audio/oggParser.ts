@@ -1,8 +1,8 @@
 import { OggPage } from './OggPage'
 import { DataWindow } from '../util/DataWindow'
-import { LogicalBitstream } from './packetExtractor'
 import { Option } from '../util/util'
 import _ from 'lodash'
+import { LogicalBitstream } from './LogicalBitstream'
 
 export const parseOggPages = (arrayBuffer: ArrayBuffer): OggPage[] => {
   let dataWindow = new DataWindow(arrayBuffer)

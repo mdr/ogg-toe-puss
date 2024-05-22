@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { OggPage } from '../audio/OggPage'
-import { extractBitstreams, LogicalBitstream } from '../audio/packetExtractor'
+import { extractBitstreams } from '../audio/packetExtractor'
 import { useShowHexService } from './useShowHexService'
 import { parseOggPages } from '../audio/oggParser'
 import { Dropzone } from './Dropzone'
 import { OggPagesTab } from './OggPagesTab'
 import { BitstreamsTab } from './BitstreamsTab'
 import { fetchBinaryFile } from '../util/networkUtils'
+import { LogicalBitstream } from '../audio/LogicalBitstream'
 
 const opusFile = `${process.env.PUBLIC_URL}/example_0.opus`
 
@@ -16,7 +17,7 @@ enum AppTab {
 }
 
 export const Main = () => {
-  const [oggPages, setOggPages] = useState<OggPage[]>()
+  const [oggPages, setOggPages] = useState<OggPage[]>([])
   const [bitstreams, setBitstreams] = useState<LogicalBitstream[]>([])
   const [tab, setTab] = useState<AppTab>(AppTab.OGG_PAGES)
   const { showHex, setShowHex } = useShowHexService()
@@ -42,7 +43,7 @@ export const Main = () => {
         <input id="showHex" onChange={() => setShowHex(!showHex)} checked={showHex} type="checkbox" />
       </div>
       <Dropzone onDrop={async (file) => importFile(await file.arrayBuffer())} />
-      {tab === AppTab.OGG_PAGES && <OggPagesTab oggPages={oggPages ?? []} />}
+      {tab === AppTab.OGG_PAGES && <OggPagesTab oggPages={oggPages} />}
       {tab === AppTab.BITSTREAMS && <BitstreamsTab streams={bitstreams} />}
     </div>
   )
