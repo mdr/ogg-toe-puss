@@ -7,6 +7,8 @@ import { isOggOpusIdentificationHeader, OggOpusIdentificationHeader } from '../a
 import { DataWindow } from '../util/DataWindow'
 import { OggOpusCommentHeaderTable } from './OggOpusCommentHeaderTable'
 import { OggOpusIdentificationHeaderTable } from './OggOpusIdentificationHeaderTable'
+import { parseTocByte } from '../audio/opusParser'
+import { OpusTocByteInfo } from './OpusTocByteInfo'
 
 export interface OggPacketsListProps {
   showHex: boolean
@@ -26,6 +28,12 @@ export const OggPacketsList = ({ packets, showHex, isOpus }: OggPacketsListProps
             <h3>
               Packet {i + 1} ({packet.byteLength} bytes) - Opus Packet
             </h3>
+            <h4>TOC Byte</h4>
+            <a className="rfc-link" href="https://datatracker.ietf.org/doc/html/rfc6716#section-3.1">
+              RFC 7845 - 5.1. Identification Header
+            </a>
+            <OpusTocByteInfo opusToc={parseTocByte(new DataWindow(packet).getByte(0))} />
+
             {showHex && (
               <div className="raw-hex" key={`packet-hex-${i}`}>
                 {asHexString(packet, true)}
