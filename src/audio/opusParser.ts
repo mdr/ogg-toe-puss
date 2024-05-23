@@ -124,7 +124,7 @@ export enum Padding {
 }
 
 export interface OpusFrameCountByte {
-  vbr: BitRateType
+  bitRateType: BitRateType
   padding: Padding
   frameCount: number
 }
@@ -139,5 +139,5 @@ export const parseOpusFrameCountByte = (frameCountByte: number): OpusFrameCountB
   // Extract the frame count (bits 0 to 5)
   const frameCount = frameCountByte & 0x3f
 
-  return { vbr, padding, frameCount }
+  return { bitRateType: vbr, padding, frameCount }
 }

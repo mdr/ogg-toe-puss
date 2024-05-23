@@ -21,7 +21,7 @@ export interface OpusFrameCountByteInfoProps {
 
 export const OpusFrameCountByteInfo = ({ opusFrameCountByte }: OpusFrameCountByteInfoProps) => (
   <ul>
-    <li>{opusFrameCountByte.vbr}</li>
+    <li>{opusFrameCountByte.bitRateType}</li>
     <li>{opusFrameCountByte.padding}</li>
     <li>Frame Count: {opusFrameCountByte.frameCount}</li>
   </ul>

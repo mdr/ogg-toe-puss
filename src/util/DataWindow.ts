@@ -23,10 +23,14 @@ export class DataWindow {
 
   getUint8 = (offset: number): number => this.dataView.getUint8(offset + this.offset)
 
-  getArrayBufferSlice = (offset: number, length: number): ArrayBuffer =>
-    this.bytes.slice(this.offset + offset, this.offset + offset + length).buffer
+  getArrayBufferSlice = (offset: number, length?: number): ArrayBuffer =>
+    this.bytes.slice(this.offset + offset, this.offset + offset + (length ?? this.length - offset)).buffer
 
-  getArrayBuffer = (): ArrayBuffer => this.bytes.buffer
+  get length(): number {
+    return this.dataView.buffer.byteLength - this.offset
+  }
+
+  getArrayBuffer = (): ArrayBuffer => this.getArrayBufferSlice(this.offset)
 
   slide = (offset: number): DataWindow => new DataWindow(this.bytes.buffer, this.offset + offset)
 }
