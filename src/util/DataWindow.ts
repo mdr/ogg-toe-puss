@@ -26,5 +26,7 @@ export class DataWindow {
   getArrayBufferSlice = (offset: number, length: number): ArrayBuffer =>
     this.bytes.slice(this.offset + offset, this.offset + offset + length).buffer
 
+  getArrayBuffer = (): ArrayBuffer => this.bytes.buffer
+
   slide = (offset: number): DataWindow => new DataWindow(this.bytes.buffer, this.offset + offset)
 }
