@@ -2,14 +2,14 @@ import _ from 'lodash'
 import { OggPage } from '../audio/OggPage'
 import { ByteTable } from './ByteTableRow'
 import {
-  ByteTableRowSpec,
   ByteTableCellSpec,
+  ByteTableRowSpec,
   multipleCellInterpretation,
   singleCellInterpretation,
 } from './ByteTableRowSpec'
+
 export interface OggPageTableProps {
   page: OggPage
-  showHex: boolean
 }
 
 const describeHeaderType = (page: OggPage): string => {
@@ -20,7 +20,7 @@ const describeHeaderType = (page: OggPage): string => {
   return parts.join(', ')
 }
 
-export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
+export const OggPageHeaderTable = ({ page }: OggPageTableProps) => {
   const rowSpecs: ByteTableRowSpec[] = [
     {
       cells: [
@@ -130,7 +130,7 @@ export const OggPageHeaderTable = ({ page, showHex }: OggPageTableProps) => {
     },
     ...getPageSegmentLengthRows(page),
   ]
-  return <ByteTable dataWindow={page.dataWindow} showHex={showHex} rows={rowSpecs} />
+  return <ByteTable dataWindow={page.dataWindow} rows={rowSpecs} />
 }
 
 const getPageSegmentLengthRows = (page: OggPage): ByteTableRowSpec[] =>

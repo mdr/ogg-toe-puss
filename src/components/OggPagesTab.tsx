@@ -45,11 +45,10 @@ export const OggPagesTab = ({ oggPages, opusBitstreamSerialNumbers }: OggPagesTa
               RFC 3533 - 6. The Ogg page format
             </a>
           </p>
-          <OggPageHeaderTable page={oggPage} showHex={showHex} />
+          <OggPageHeaderTable page={oggPage} />
           <h2>Ogg Packets</h2>
           <OggPacketsList
             packets={packets}
-            showHex={showHex}
             isOpus={opusBitstreamSerialNumbers.includes(oggPage.bitstreamSerialNumber)}
           />
           <h2>Segments</h2>

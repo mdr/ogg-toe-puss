@@ -5,10 +5,9 @@ import { ByteTableRowSpec, multipleCellInterpretation, singleCellInterpretation 
 
 export interface OggOpusIdentificationHeaderTableProps {
   header: OggOpusIdentificationHeader
-  showHex: boolean
 }
 
-export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIdentificationHeaderTableProps) => {
+export const OggOpusIdentificationHeaderTable = ({ header }: OggOpusIdentificationHeaderTableProps) => {
   const rowSpecs: ByteTableRowSpec[] = [
     {
       cells: [
@@ -78,5 +77,5 @@ export const OggOpusIdentificationHeaderTable = ({ header, showHex }: OggOpusIde
       ],
     },
   ]
-  return <ByteTable dataWindow={header.dataWindow} showHex={showHex} rows={rowSpecs} />
+  return <ByteTable dataWindow={header.dataWindow} rows={rowSpecs} />
 }

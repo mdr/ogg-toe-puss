@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import './App.scss'
-import { useShowHexService } from './useShowHexService'
 import { BitstreamSerialNumber } from '../audio/OggPage'
 import { detectStreamType } from '../audio/oggParser'
 import _ from 'lodash'
@@ -14,7 +13,6 @@ export interface BitstreamsTabProps {
 }
 
 export const BitstreamsTab = ({ streams, opusBitstreamSerialNumbers }: BitstreamsTabProps) => {
-  const { showHex } = useShowHexService()
   const [previousStreams, setPreviousStreams] = useState<LogicalBitstream[]>(streams)
   const [selectedStreamSerialNumber, setSelectedStreamSerialNumber] = useState<BitstreamSerialNumber>(
     streams[0].serialNumber
@@ -49,11 +47,7 @@ export const BitstreamsTab = ({ streams, opusBitstreamSerialNumbers }: Bitstream
         </div>
       ))}
       <h2>Ogg Packets</h2>
-      <OggPacketsList
-        packets={stream.packets}
-        showHex={showHex}
-        isOpus={opusBitstreamSerialNumbers.includes(stream.serialNumber)}
-      />
+      <OggPacketsList packets={stream.packets} isOpus={opusBitstreamSerialNumbers.includes(stream.serialNumber)} />
     </div>
   )
 }

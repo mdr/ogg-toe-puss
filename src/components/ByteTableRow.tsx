@@ -4,15 +4,16 @@ import { DataWindow } from '../util/DataWindow'
 import { asHexPair } from '../util/hexUtils'
 import { Bytes } from '../util/types'
 import { ByteTableRowSpec, CellInterpretationType } from './ByteTableRowSpec'
+import { useShowHexService } from './useShowHexService'
+
 export interface ByteTableProps {
-  showHex: boolean
   rows: ByteTableRowSpec[]
   dataWindow: DataWindow
 }
 
 const TableWidth: Bytes = 4
 
-export const ByteTable = ({ dataWindow, showHex, rows }: ByteTableProps) => (
+export const ByteTable = ({ dataWindow, rows }: ByteTableProps) => (
   <table className="byte-table">
     <tbody>
       {rows.map((row, i) => {
@@ -20,14 +21,7 @@ export const ByteTable = ({ dataWindow, showHex, rows }: ByteTableProps) => (
         const endByte = startByte + _.sumBy(row.cells, (cell) => cell.width) - 1
         const hex = _.range(startByte, endByte + 1).map((byte) => asHexPair(dataWindow.getByte(byte)))
         return (
-          <ByteTableRow
-            key={`byte-table-row-${i}`}
-            showHex={showHex}
-            rowSpec={row}
-            startByte={startByte}
-            endByte={endByte}
-            hex={hex}
-          />
+          <ByteTableRow key={`byte-table-row-${i}`} rowSpec={row} startByte={startByte} endByte={endByte} hex={hex} />
         )
       })}
     </tbody>
@@ -37,12 +31,12 @@ export const ByteTable = ({ dataWindow, showHex, rows }: ByteTableProps) => (
 export interface ByteTableRowProps {
   startByte: number
   endByte: number
-  showHex: boolean
   rowSpec: ByteTableRowSpec
   hex: string[]
 }
 
-export const ByteTableRow = ({ startByte, endByte, showHex, rowSpec, hex }: ByteTableRowProps) => {
+export const ByteTableRow = ({ startByte, endByte, rowSpec, hex }: ByteTableRowProps) => {
+  const { showHex } = useShowHexService()
   const { cells } = rowSpec
   const getHex = (i: number, j: number): string => hex[_.sumBy(_.take(cells, i), (cell) => cell.width) + j]
   return (

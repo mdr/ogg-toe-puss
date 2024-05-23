@@ -6,10 +6,9 @@ import { arrangeCellsIntoRows } from './cellArranger'
 
 export interface OggOpusCommentHeaderTableProps {
   header: OggOpusCommentHeader
-  showHex: boolean
 }
 
-export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHeaderTableProps) => {
+export const OggOpusCommentHeaderTable = ({ header }: OggOpusCommentHeaderTableProps) => {
   const rowSpecs: ByteTableRowSpec[] = [
     {
       cells: [
@@ -55,5 +54,5 @@ export const OggOpusCommentHeaderTable = ({ header, showHex }: OggOpusCommentHea
     ),
   ]
 
-  return <ByteTable dataWindow={header.dataWindow} showHex={showHex} rows={rowSpecs} />
+  return <ByteTable dataWindow={header.dataWindow} rows={rowSpecs} />
 }
